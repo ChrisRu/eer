@@ -1,0 +1,42 @@
+{
+  "name": "eer",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bulma": "^0.6.2",
+    "normalize.css": "^8.0.0",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-scripts-ts": "2.14.0"
+  },
+  "scripts": {
+    "lint": "tslint -p ./tslint.json",
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "precommit": "lint-staged",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch true --recursive true --source-map-contents sass --source-map-embed true",
+    "build-css":
+      "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm-run-all build-css build-js",
+    "start-js": "react-scripts-ts start",
+    "build-js": "react-scripts-ts build",
+    "eject": "react-scripts-ts eject"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.2.2",
+    "@types/node": "^9.6.4",
+    "@types/react": "^16.3.8",
+    "@types/react-dom": "^16.0.5",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.4",
+    "node-sass-chokidar": "^1.2.2",
+    "npm-run-all": "^4.1.2",
+    "source-map-explorer": "^1.5.0",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.10.0",
+    "tslint-eslint-rules": "^5.1.0",
+    "typescript": "^2.8.1",
+    "typescript-eslint-parser": "^14.0.0"
+  }
+}

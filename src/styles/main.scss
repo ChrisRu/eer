@@ -1,0 +1,12 @@
+@import 'bulma';
+@import '../../node_modules/normalize.css/normalize.css';
+
+@import 'view';
+
+html {
+  overflow-y: hidden;
+}
+
+.no-touch {
+  pointer-events: none;
+}
