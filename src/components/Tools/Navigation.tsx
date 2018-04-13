@@ -50,7 +50,6 @@ const Navigation = () => (
             Items
           </button>
         </li>
-
         <li className="navigation__item">
           <button className="button navigation__button">Grid</button>
         </li>

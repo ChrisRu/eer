@@ -49,7 +49,6 @@
       "timeEnd",
       "trace"
     ],
-    "allow-parameter": true,
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": true,
     "no-construct": true,

@@ -17,8 +17,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js",
     "start-js": "react-scripts-ts start",
-    "build-js": "react-scripts-ts build",
-    "eject": "react-scripts-ts eject"
+    "build-js": "react-scripts-ts build"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
