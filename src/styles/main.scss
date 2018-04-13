@@ -1,8 +1,7 @@
-@import 'bulma';
-@import '../../node_modules/normalize.css/normalize.css';
-
-@import 'view';
-
-html {
-  overflow-y: hidden;
-}
+@import 'settings';
+@import 'tools';
+@import 'generic';
+@import 'elements';
+@import 'objects';
+@import 'components/index';
+@import 'trumps';

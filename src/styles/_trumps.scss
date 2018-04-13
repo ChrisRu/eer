@@ -1,0 +1,12 @@
+/*
+07.
+  This layer beats – or 'trumps' – all other layers,
+  and has the power to override anything at all that has gone before it.
+  It is inelegant and heavy-handed, and contains utility and helper classes, hacks and overrides.
+*/
+.diagram {
+  * {
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+}

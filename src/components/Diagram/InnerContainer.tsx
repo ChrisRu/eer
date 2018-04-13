@@ -28,7 +28,10 @@ class InnerContainer extends React.Component<
   };
 
   get transform(): string {
-    const { zoom, pos: { x, y } } = this.state;
+    const {
+      zoom,
+      pos: { x, y }
+    } = this.state;
 
     return `translate(${x} ${y}) scale(${zoom})`;
   }
@@ -68,7 +71,7 @@ class InnerContainer extends React.Component<
           height="100%"
           onMouseDown={this.mouseDown}
           fill="transparent"
-          className="clickable"
+          className="diagram__rect"
         />
         <g transform={this.transform}>{this.props.children}</g>
       </React.Fragment>

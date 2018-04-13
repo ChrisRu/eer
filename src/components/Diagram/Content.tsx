@@ -31,7 +31,7 @@ class Content extends React.Component<IContentProps, {}, never> {
       <g transform={this.transform}>
         {items.map((Item: React.ReactElement<ContentItem>, index) => (
           <Item.type
-            y={index * 32}
+            y={index * 30}
             {...Item.props}
             onUpdateSize={this.props.onUpdateSize}
             minWidth={minWidth}

@@ -1,0 +1,38 @@
+.diagram {
+  height: 100vh;
+  width: 100vw;
+
+  &__text {
+    font-family: $family-primary;
+
+    &--header {
+      font-weight: 500;
+    }
+  }
+
+  &__rect {
+    &--header {
+      fill: $diagram-block-header;
+      transition: $transition-speed $transition-easing fill;
+      cursor: -webkit-grab;
+      cursor: move;
+
+      &:hover {
+        fill: $diagram-block-header-hover;
+      }
+
+      &:active {
+        cursor: -webkit-grabbing;
+      }
+    }
+
+    &--content {
+      fill: $diagram-block-item;
+      transition: $transition-speed $transition-easing fill;
+
+      &:hover {
+        fill: $diagram-block-item-hover;
+      }
+    }
+  }
+}

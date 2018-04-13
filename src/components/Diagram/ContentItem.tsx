@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
 import Text from './Text';
 
 interface IContentItemProps {
@@ -12,6 +11,7 @@ interface IContentItemProps {
 }
 
 interface IContentItemState {
+  editing: boolean;
   pos: {
     x: number;
     y: number;
@@ -31,6 +31,7 @@ class ContentItem extends React.Component<
   private element: SVGTextElement | HTMLInputElement | null;
 
   state = {
+    editing: false,
     pos: {
       x: 0,
       y: 0
@@ -80,6 +81,14 @@ class ContentItem extends React.Component<
     }
   };
 
+  updateText = () => {
+    this.setState({ editing: true });
+  };
+
+  doubleClick = () => {
+    this.setState({ editing: false });
+  };
+
   render() {
     const { pos, textHeight } = this.state;
     const { children, minWidth, onMouseDown } = this.props;
@@ -88,20 +97,21 @@ class ContentItem extends React.Component<
       <React.Fragment>
         <rect
           {...pos}
-          fill="#F9F9F9"
           transform="translate(-10 0)"
           width={minWidth}
           height={(textHeight || fontSize) + padding.height}
+          onDoubleClick={this.doubleClick}
           onMouseDown={() => (onMouseDown ? onMouseDown(ContentItem) : null)}
-          className={classNames({ clickable: !!onMouseDown }, 'ContentItem')}
+          className="diagram__rect diagram__rect--content"
         />
         <Text
           {...pos}
-          dx={padding.width / 4}
-          dy={fontSize + padding.height / 2}
+          dx={0}
+          dy={fontSize + padding.height / 3}
           fontFamily="Verdana"
           fontSize={fontSize}
           pointerEvents="none"
+          className="diagram__text diagram__text--header"
           createRef={this.createdText}
           onChange={(value: string) => {
             console.log(value);

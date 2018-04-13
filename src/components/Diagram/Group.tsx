@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Pos from '../../util/Pos';
-import WindowSub from '../../util/windowSub';
-import Header from '../components/Header';
-import Content from '../components/Content';
+import Pos from '../util/Pos';
+import WindowSub from '../util/windowSub';
+import Header from './Header';
+import Content from './Content';
 
 interface IGroupProps {
   movable?: boolean;

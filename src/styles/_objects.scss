@@ -1,0 +1,61 @@
+/*
+05.
+  Users of OOCSS will be familiar with the concept of objects.
+  This is the first layer in which we find class-based selectors.
+  These are concerned with styling non-cosmetic design patterns, or 'objects'.
+  Objects can range from something as simple as a .wrapper element, to layout systems,
+  through to things like the OOCSS poster child – the Media Object.
+  This layer affects less of the DOM than the last layer, has a higher specificity,
+  and is slightly more explicit in that we are now targeting sections of the DOM with classes.
+*/
+
+.clickable {
+  pointer-events: all;
+}
+
+.button {
+  background-color: $button-default-background;
+  color: $button-default-color;
+  border: 0;
+  border-radius: $object-radius;
+  font-family: $family-primary;
+  padding: 0.5em 1em;
+  transition: $transition-speed $transition-speed background-color;
+  outline: none;
+
+  &:hover {
+    background-color: $button-default-background-hover;
+  }
+
+  &:active {
+    background-color: $button-default-active-background;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.input {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: $object-radius;
+  font-family: $family-primary;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: middle;
+
+  path,
+  polygon,
+  rect {
+    fill: $icon-color;
+  }
+
+  circle {
+    stroke: $icon-color;
+    stroke-width: 1;
+  }
+}

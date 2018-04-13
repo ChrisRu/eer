@@ -14,9 +14,9 @@
     "lint": "tslint -p ./tslint.json",
     "analyze": "source-map-explorer build/static/js/main.*",
     "watch-css":
-      "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch true --recursive true --source-map-contents sass --source-map-embed true",
+      "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles -o src/styles --watch true --recursive true --source-map-contents sass --source-map-embed true",
     "build-css":
-      "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+      "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles -o src/styles",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js",
     "start-js": "react-scripts-ts start",

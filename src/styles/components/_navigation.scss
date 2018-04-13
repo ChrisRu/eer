@@ -1,0 +1,43 @@
+.navigation {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  position: relative;
+
+  &__item {
+    list-style: none;
+    display: block;
+    position: relative;
+
+    &:hover {
+      .navigation {
+        display: block;
+      }
+    }
+
+    .navigation {
+      display: none;
+      position: absolute;
+      top: 100%;
+      border: 1px solid #bbb;
+      border-top: 0;
+      left: 0;
+
+      &__button {
+        text-align: left;
+      }
+    }
+  }
+
+  &__button {
+    padding: 0.3em 1em;
+    border-radius: 0;
+    min-width: 100%;
+    white-space: nowrap;
+
+    &-toggle {
+      margin-left: -0.5em;
+      margin-right: 0.3em;
+    }
+  }
+}

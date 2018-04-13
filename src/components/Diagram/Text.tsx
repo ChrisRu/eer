@@ -9,13 +9,11 @@ interface ITextProps {
 
 interface ITextState {
   value: string;
-  editing: boolean;
 }
 
 class Text extends React.Component<ITextProps, ITextState, never> {
   state = {
-    value: '',
-    editing: false
+    value: ''
   };
 
   static getDerivedStateFromProps(
@@ -28,18 +26,14 @@ class Text extends React.Component<ITextProps, ITextState, never> {
     };
   }
 
-  onClick = () => {
-    this.setState({ editing: true });
-  };
-
   onChange = (event: React.ChangeEvent<any>) => {
     console.log(event);
     this.setState({ value: event.target.value });
   };
 
   render() {
-    const { value, editing } = this.state;
-    const { onChange, createRef, ...props } = this.props;
+    const { value } = this.state;
+    const { onChange, createRef, editing, ...props } = this.props;
 
     return editing ? (
       <foreignObject x={-5} width={100} height={32}>
@@ -48,16 +42,11 @@ class Text extends React.Component<ITextProps, ITextState, never> {
           type="text"
           onChange={this.onChange}
           value={value}
-          width={100}
-          height={32}
+          className="input input--diagram"
         />
       </foreignObject>
     ) : (
-      <text
-        className="clickable"
-        ref={createRef}
-        onDoubleClick={this.onClick}
-        {...props}>
+      <text ref={createRef} {...props}>
         {value}
       </text>
     );

@@ -35,6 +35,7 @@ class Grid extends React.Component<IGridProps> {
               width={size * spacing}
               height={size * spacing}
               fill="url(#smallGrid)"
+              className="diagram__rect"
             />
             <path
               d={`M ${size * spacing} 0 L 0 0 0 ${size * spacing}`}
@@ -45,7 +46,12 @@ class Grid extends React.Component<IGridProps> {
           </pattern>
         </defs>
 
-        <rect width="100%" height="100%" fill="url(#grid)" />
+        <rect
+          width="100%"
+          height="100%"
+          fill="url(#grid)"
+          className="diagram__rect"
+        />
       </React.Fragment>
     );
   }

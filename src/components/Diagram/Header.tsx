@@ -1,6 +1,5 @@
 import * as React from 'react';
-import Pos from '../../util/Pos';
-import * as classNames from 'classnames';
+import Pos from '../util/Pos';
 
 interface IHeaderProps {
   children?: React.ReactChild;
@@ -65,27 +64,26 @@ class Header extends React.Component<IHeaderProps, IHeaderState, never> {
   };
 
   render() {
-    const { pos, textHeight } = this.state;
+    const { pos } = this.state;
     const { children, onMouseDown, minWidth } = this.props;
 
     return (
       <React.Fragment>
         <rect
           {...pos}
-          fill="#ddd"
           transform="translate(-10 0)"
           width={minWidth}
-          height={(textHeight || fontSize) + padding.height}
+          height={fontSize + padding.height}
           onMouseDown={() => (onMouseDown ? onMouseDown(Header) : null)}
-          className={classNames({ clickable: !!onMouseDown }, 'header')}
+          className="diagram__rect diagram__rect--header"
         />
         <text
           {...pos}
-          dx={padding.width / 4}
-          dy={fontSize + padding.height / 2}
+          dy={fontSize + padding.height / 4}
           fontFamily="Verdana"
           fontSize={fontSize}
           pointerEvents="none"
+          className="diagram__text diagram__text--header"
           ref={this.createdText}>
           {children}
         </text>

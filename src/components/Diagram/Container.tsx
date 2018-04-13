@@ -20,7 +20,7 @@ class View extends React.Component<IViewProps, IViewState> {
     }
   };
 
-  updateSize = (): void => {
+  updateSize = () => {
     this.setState({
       size: {
         height: window.innerHeight,
@@ -34,7 +34,7 @@ class View extends React.Component<IViewProps, IViewState> {
     const { children } = this.props;
 
     return (
-      <svg className="view" xmlns="http://www.w3.org/2000/svg" {...size}>
+      <svg className="diagram" xmlns="http://www.w3.org/2000/svg" {...size}>
         <defs>
           <filter id="box-shadow" x="-10%" y="-10%" width="120%" height="120%">
             <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" />

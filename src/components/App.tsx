@@ -1,16 +1,19 @@
 import * as React from 'react';
 import Pos from './util/Pos';
-import Content from './Field/components/Content';
-import ContentItem from './Field/components/ContentItem';
-import Entity from './Field/components/Entity';
-import Grid from './Field/components/Grid';
-import Header from './Field/components/Header';
-import Container from './Field/Container';
-import InnerContainer from './Field/InnerContainer';
+import Navigation from './Tools/Navigation';
+import Diagram, {
+  Grid,
+  InnerContainer,
+  Entity,
+  Header,
+  Content,
+  ContentItem
+} from './Diagram';
 
 const App = () => (
   <div className="app">
-    <Container>
+    <Navigation />
+    <Diagram>
       <Grid size={20} />
       <InnerContainer>
         <Entity pos={new Pos(50, 100)}>
@@ -29,7 +32,7 @@ const App = () => (
           </Content>
         </Entity>
       </InnerContainer>
-    </Container>
+    </Diagram>
   </div>
 );
 

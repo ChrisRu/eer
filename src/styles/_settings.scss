@@ -1,0 +1,38 @@
+/*
+01.
+  If you are using a preprocessor, start here.
+  This holds any global settings for your project.
+  I'd like to stress the word global – this layer should only house settings that need to be accessed from anywhere.
+  Settings like $heading-size-1 should be defined in the Headings partial.
+  This ensures this layer stays nice and slim,
+  and means that most settings can be found alongside the code that uses them,
+  making finding things far simpler.
+*/
+
+// FONTS
+$family-primary: 'Work Sans', serif;
+
+// OBJECTS
+$object-radius: 5px;
+
+// BUTTONS
+$button-default-color: #282828;
+$button-default-background: #fff;
+$button-default-background-hover: #e2e2e2;
+$button-default-active-background: #d8d8d8;
+
+// ICONS
+$icon-color: #282828;
+
+// TRANSITIONS
+$transition-speed: 0.1s;
+$transition-easing: ease;
+
+// DIAGRAM
+$diagram-background: #fff;
+
+$diagram-block-item: #f9f9f9;
+$diagram-block-item-hover: #f0f0f0;
+
+$diagram-block-header: #e2e2e2;
+$diagram-block-header-hover: #ddd;
