@@ -1,17 +1,20 @@
 import * as React from 'react';
-import Pos from '../../util/Pos';
 import * as classNames from 'classnames';
 
-interface IHeaderProps {
+interface IContentItemProps {
   children?: React.ReactChild;
-  pos?: Pos;
+  x?: number;
+  y?: number;
   minWidth?: number;
   onUpdateSize?: (width: number) => void;
   onMouseDown?: (type: any) => void;
 }
 
-interface IHeaderState {
-  pos: Pos;
+interface IContentItemState {
+  pos: {
+    x: number;
+    y: number;
+  };
   textHeight: number | undefined;
   textWidth: number | undefined;
 }
@@ -19,23 +22,32 @@ interface IHeaderState {
 const padding = { width: 40, height: 10 };
 const fontSize = 18;
 
-class Header extends React.Component<IHeaderProps, IHeaderState, never> {
+class ContentItem extends React.Component<
+  IContentItemProps,
+  IContentItemState,
+  never
+> {
   private element: SVGTextElement | null;
 
   state = {
-    pos: new Pos(),
+    pos: {
+      x: 0,
+      y: 0
+    },
     textHeight: undefined,
     textWidth: undefined
   };
 
   static getDerivedStateFromProps(
-    nextProps: IHeaderProps,
-    nextState: IHeaderState
+    nextProps: IContentItemProps,
+    nextState: IContentItemState
   ) {
-    const { x, y } = nextProps.pos || new Pos();
     return {
       ...nextState,
-      pos: new Pos(x, y)
+      pos: {
+        x: nextProps.x || 0,
+        y: nextProps.y || 0
+      }
     };
   }
 
@@ -66,18 +78,18 @@ class Header extends React.Component<IHeaderProps, IHeaderState, never> {
 
   render() {
     const { pos, textHeight } = this.state;
-    const { children, onMouseDown, minWidth } = this.props;
+    const { children, minWidth, onMouseDown } = this.props;
 
     return (
       <React.Fragment>
         <rect
           {...pos}
-          fill="#ddd"
+          fill="#F9F9F9"
           transform="translate(-10 0)"
           width={minWidth}
           height={(textHeight || fontSize) + padding.height}
-          onMouseDown={() => (onMouseDown ? onMouseDown(Header) : null)}
-          className={classNames({ clickable: !!onMouseDown }, 'header')}
+          onMouseDown={() => (onMouseDown ? onMouseDown(ContentItem) : null)}
+          className={classNames({ clickable: !!onMouseDown }, 'ContentItem')}
         />
         <text
           {...pos}
@@ -94,4 +106,4 @@ class Header extends React.Component<IHeaderProps, IHeaderState, never> {
   }
 }
 
-export default Header;
+export default ContentItem;

@@ -2,13 +2,14 @@ import * as React from 'react';
 
 interface IListener<T> {
   context: any;
-  method: (argument: T) => void;
+  method: (argument?: T) => void;
   type: string;
+  init?: boolean;
 }
 
 const events = {};
 
-type Composers = Array<{ action: string; method: string }>;
+type Composers = Array<{ action: string; method: string; init?: boolean }>;
 
 export default function generateSub<T>(
   fireMethod: (type: string, callback: (argument: T) => void) => void
@@ -24,11 +25,14 @@ export default function generateSub<T>(
           super(props, context);
 
           composers.forEach(composer => {
-            listeners.push({
+            const newListener: IListener<T> = {
               context: this,
+              init: composer.init,
               method: this[composer.method],
               type: composer.action
-            });
+            };
+
+            listeners.push(newListener);
 
             if (!events[composer.action]) {
               events[composer.action] = true;
@@ -42,6 +46,21 @@ export default function generateSub<T>(
               });
             }
           });
+        }
+
+        componentDidMount() {
+          if (super.componentDidMount) {
+            super.componentDidMount();
+          }
+
+          listeners
+            .filter(
+              listener =>
+                listener.context !== this && listener.init && listener.method
+            )
+            .forEach(listener => {
+              listener.method();
+            });
         }
 
         componentWillUnmount() {

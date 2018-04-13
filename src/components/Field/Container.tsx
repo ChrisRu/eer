@@ -1,4 +1,5 @@
 import * as React from 'react';
+import WindowSub from '../util/windowSub';
 
 interface IViewProps {
   children?: React.ReactChild[] | React.ReactChild;
@@ -28,22 +29,31 @@ class View extends React.Component<IViewProps, IViewState> {
     });
   };
 
-  componentDidMount() {
-    this.updateSize();
-
-    window.addEventListener('resize', this.updateSize);
-  }
-
   render() {
+    const { size } = this.state;
+    const { children } = this.props;
+
     return (
-      <svg
-        className="view"
-        xmlns="http://www.w3.org/2000/svg"
-        {...this.state.size}>
-        {this.props.children}
+      <svg className="view" xmlns="http://www.w3.org/2000/svg" {...size}>
+        <defs>
+          <filter id="box-shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" />
+            <feColorMatrix
+              result="matrixOut"
+              in="offOut"
+              type="matrix"
+              values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0"
+            />
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="0.2" />
+            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+          </filter>
+        </defs>
+        {children}
       </svg>
     );
   }
 }
 
-export default View;
+export default WindowSub([
+  { action: 'resize', method: 'updateSize', init: true }
+])(View);

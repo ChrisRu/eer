@@ -7,3 +7,11 @@ svg > * {
   user-select: none;
   -webkit-user-drag: none;
 }
+
+svg * {
+  pointer-events: none;
+}
+
+svg rect.clickable {
+  pointer-events: all;
+}

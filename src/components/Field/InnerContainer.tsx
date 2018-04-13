@@ -68,6 +68,7 @@ class InnerContainer extends React.Component<
           height="100%"
           onMouseDown={this.mouseDown}
           fill="transparent"
+          className="clickable"
         />
         <g transform={this.transform}>{this.props.children}</g>
       </React.Fragment>

@@ -45,12 +45,7 @@ class Grid extends React.Component<IGridProps> {
           </pattern>
         </defs>
 
-        <rect
-          className="no-touch"
-          width="100%"
-          height="100%"
-          fill="url(#grid)"
-        />
+        <rect width="100%" height="100%" fill="url(#grid)" />
       </React.Fragment>
     );
   }
