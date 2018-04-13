@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bulma": "^0.6.2",
     "classnames": "^2.2.5",
     "normalize.css": "^8.0.0",
     "react": "^16.3.1",
@@ -13,10 +12,8 @@
   "scripts": {
     "lint": "tslint -p ./tslint.json",
     "analyze": "source-map-explorer build/static/js/main.*",
-    "watch-css":
-      "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles -o src/styles --watch true --recursive true --source-map-contents sass --source-map-embed true",
-    "build-css":
-      "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles -o src/styles",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles -o src/styles --watch true --recursive true --source-map-contents sass --source-map-embed true",
+    "build-css": "node-sass-chokidar --include-path ./src/styles --include-path ./node_modules src/styles -o src/styles",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm-run-all build-css build-js",
     "start-js": "react-scripts-ts start",
