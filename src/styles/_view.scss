@@ -8,10 +8,13 @@ svg > * {
   -webkit-user-drag: none;
 }
 
-svg * {
-  pointer-events: none;
-}
+svg {
+  text,
+  rect {
+    pointer-events: none;
 
-svg rect.clickable {
-  pointer-events: all;
+    &.clickable {
+      pointer-events: all;
+    }
+  }
 }

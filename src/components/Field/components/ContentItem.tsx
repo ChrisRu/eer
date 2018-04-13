@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
+import Text from './Text';
 
 interface IContentItemProps {
-  children?: React.ReactChild;
+  children: string;
   x?: number;
   y?: number;
   minWidth?: number;
@@ -27,7 +28,7 @@ class ContentItem extends React.Component<
   IContentItemState,
   never
 > {
-  private element: SVGTextElement | null;
+  private element: SVGTextElement | HTMLInputElement | null;
 
   state = {
     pos: {
@@ -54,7 +55,10 @@ class ContentItem extends React.Component<
   componentDidMount() {
     if (this.element) {
       const { minWidth = 0, onUpdateSize } = this.props;
-      const { height, width } = this.element.getBBox();
+      const { height, width } =
+        typeof this.element === typeof SVGTextElement
+          ? (this.element as SVGTextElement).getBBox()
+          : this.element.getBoundingClientRect();
 
       const newWidth = (width || 10) + padding.width;
       const calculatedWidth = newWidth > minWidth ? newWidth : minWidth;
@@ -70,7 +74,7 @@ class ContentItem extends React.Component<
     }
   }
 
-  createdText = (element: SVGTextElement | null) => {
+  createdText = (element: SVGTextElement | HTMLInputElement | null) => {
     if (element) {
       this.element = element;
     }
@@ -91,16 +95,19 @@ class ContentItem extends React.Component<
           onMouseDown={() => (onMouseDown ? onMouseDown(ContentItem) : null)}
           className={classNames({ clickable: !!onMouseDown }, 'ContentItem')}
         />
-        <text
+        <Text
           {...pos}
           dx={padding.width / 4}
           dy={fontSize + padding.height / 2}
           fontFamily="Verdana"
           fontSize={fontSize}
           pointerEvents="none"
-          ref={this.createdText}>
-          {children}
-        </text>
+          createRef={this.createdText}
+          onChange={(value: string) => {
+            console.log(value);
+          }}
+          value={children}
+        />
       </React.Fragment>
     );
   }
