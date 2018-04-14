@@ -1,5 +1,6 @@
 import * as React from 'react';
 import WindowSub from '../util/windowSub';
+import Pos from '../util/Pos';
 
 interface IInnerContainerProps {
   children?: React.ReactChild[] | React.ReactChild;
@@ -7,10 +8,7 @@ interface IInnerContainerProps {
 
 interface IInnerContainerState {
   mouseDown: boolean;
-  pos: {
-    x: number;
-    y: number;
-  };
+  pos: Pos;
   zoom: number;
 }
 
@@ -20,10 +18,7 @@ class InnerContainer extends React.Component<
 > {
   state = {
     mouseDown: false,
-    pos: {
-      x: 0,
-      y: 0
-    },
+    pos: new Pos(),
     zoom: 1
   };
 
@@ -41,10 +36,7 @@ class InnerContainer extends React.Component<
       const { movementX, movementY } = event;
 
       this.setState(prevState => ({
-        pos: {
-          x: prevState.pos.x + movementX,
-          y: prevState.pos.y + movementY
-        }
+        pos: new Pos(prevState.pos.x + movementX, prevState.pos.y + movementY)
       }));
     }
   };

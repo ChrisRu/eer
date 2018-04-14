@@ -1,26 +1,26 @@
 import * as React from 'react';
-import Pos from '../util/Pos';
-import WindowSub from '../util/windowSub';
-import Header from './Header';
-import Content from './Content';
+import Pos from '../../util/Pos';
+import WindowSub from '../../util/windowSub';
+import GroupChildren, { render } from './GroupChildren';
+import { Header } from '..';
 
 interface IGroupProps {
   movable?: boolean;
   pos: Pos;
-  render: (
-    onMouseDown: (type: string) => void
-  ) => Array<React.ReactElement<Content | Header>>;
+  render: render;
 }
 
 interface IGroupState {
   mouseDown: boolean;
   transform: Pos;
+  posUpdate: boolean;
 }
 
-class Group extends React.Component<IGroupProps, IGroupState, never> {
+class Group extends React.Component<IGroupProps, IGroupState> {
   state = {
     mouseDown: false,
-    transform: new Pos()
+    transform: new Pos(),
+    posUpdate: false
   };
 
   static getDerivedStateFromProps(
@@ -38,9 +38,12 @@ class Group extends React.Component<IGroupProps, IGroupState, never> {
     if (this.state.mouseDown) {
       const { movementX, movementY } = event;
 
-      this.setState(prevState => ({
-        transform: prevState.transform.add(new Pos(movementX, movementY))
-      }));
+      if (movementX !== 0 || movementY !== 0) {
+        this.setState(prevState => ({
+          transform: prevState.transform.add(new Pos(movementX, movementY)),
+          posUpdate: true
+        }));
+      }
     }
   };
 
@@ -48,16 +51,18 @@ class Group extends React.Component<IGroupProps, IGroupState, never> {
     if (type === Header) {
       if (this.props.movable) {
         this.setState({
-          mouseDown: true
+          mouseDown: true,
+          posUpdate: true
         });
       }
     }
   };
 
   mouseUp = () => {
-    this.setState(prevState => ({
-      mouseDown: false
-    }));
+    this.setState({
+      mouseDown: false,
+      posUpdate: true
+    });
   };
 
   get transform() {
@@ -66,9 +71,15 @@ class Group extends React.Component<IGroupProps, IGroupState, never> {
   }
 
   render() {
+    const { posUpdate } = this.state;
+
     return (
       <g filter="url(#box-shadow)" transform={this.transform}>
-        {this.props.render(this.mouseDown)}
+        <GroupChildren
+          noUpdate={posUpdate}
+          render={this.props.render}
+          onMouseDown={this.mouseDown}
+        />
       </g>
     );
   }

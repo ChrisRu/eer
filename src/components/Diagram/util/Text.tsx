@@ -11,7 +11,7 @@ interface ITextState {
   value: string;
 }
 
-class Text extends React.Component<ITextProps, ITextState, never> {
+class Text extends React.Component<ITextProps, ITextState> {
   state = {
     value: ''
   };

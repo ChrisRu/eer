@@ -1,21 +1,17 @@
 import * as React from 'react';
-import ContentItem from './ContentItem';
+import { ContentItem } from '.';
+import { IEntityChild } from './Entity';
+import Pos from '../util/Pos';
 
-interface IContentProps {
+interface IContentProps extends IEntityChild {
   children:
     | Array<React.ReactElement<ContentItem>>
     | React.ReactElement<ContentItem>;
   x?: number;
   y?: number;
-  minWidth?: number;
-  onUpdateSize?: (width: number) => void;
 }
 
-// interface IContentState {}
-
-class Content extends React.Component<IContentProps, {}, never> {
-  state = {};
-
+class Content extends React.Component<IContentProps> {
   get transform(): string {
     const { x = 0, y = 0 } = this.props;
 
@@ -23,18 +19,19 @@ class Content extends React.Component<IContentProps, {}, never> {
   }
 
   render() {
-    const { children, minWidth } = this.props;
-
+    const { children, minWidth, onUpdateSize, onMouseDown } = this.props;
     const items: any[] = Array.isArray(children) ? children : [children];
 
     return (
-      <g transform={this.transform}>
-        {items.map((Item: React.ReactElement<ContentItem>, index) => (
+      <g transform={this.transform} className="diagram__content">
+        {items.map((Item: React.ReactElement<any>, index) => (
           <Item.type
-            y={index * 30}
+            key={Item.props.children}
+            pos={new Pos(0, index * 28)}
             {...Item.props}
-            onUpdateSize={this.props.onUpdateSize}
             minWidth={minWidth}
+            onUpdateSize={onUpdateSize}
+            onMouseDown={onMouseDown}
           />
         ))}
       </g>

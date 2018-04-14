@@ -8,7 +8,7 @@ interface IGridProps {
 
 class Grid extends React.Component<IGridProps> {
   render() {
-    const { size = 30, spacing = 8, color = '#bbb' } = this.props;
+    const { size = 30, spacing = 8 } = this.props;
 
     return (
       <React.Fragment>
@@ -21,7 +21,7 @@ class Grid extends React.Component<IGridProps> {
             <path
               d={`M ${size} 0 L 0 0 0 ${size}`}
               fill="none"
-              stroke={color}
+              className="diagram__grid-line"
               strokeWidth="0.5"
             />
           </pattern>
@@ -40,7 +40,7 @@ class Grid extends React.Component<IGridProps> {
             <path
               d={`M ${size * spacing} 0 L 0 0 0 ${size * spacing}`}
               fill="none"
-              stroke={color}
+              className="diagram__grid-line"
               strokeWidth="1"
             />
           </pattern>
@@ -50,7 +50,7 @@ class Grid extends React.Component<IGridProps> {
           width="100%"
           height="100%"
           fill="url(#grid)"
-          className="diagram__rect"
+          className="diagram__rect diagram__grid"
         />
       </React.Fragment>
     );

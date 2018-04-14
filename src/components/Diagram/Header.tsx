@@ -1,30 +1,24 @@
 import * as React from 'react';
 import Pos from '../util/Pos';
+import { IEntityChild } from './Entity';
 
-interface IHeaderProps {
+interface IHeaderProps extends IEntityChild {
   children?: React.ReactChild;
   pos?: Pos;
-  minWidth?: number;
-  onUpdateSize?: (width: number) => void;
-  onMouseDown?: (type: any) => void;
 }
 
 interface IHeaderState {
   pos: Pos;
-  textHeight: number | undefined;
-  textWidth: number | undefined;
 }
 
 const padding = { width: 40, height: 10 };
 const fontSize = 18;
 
-class Header extends React.Component<IHeaderProps, IHeaderState, never> {
+class Header extends React.Component<IHeaderProps, IHeaderState> {
   private element: SVGTextElement | null;
 
   state = {
-    pos: new Pos(),
-    textHeight: undefined,
-    textWidth: undefined
+    pos: new Pos()
   };
 
   static getDerivedStateFromProps(
@@ -41,15 +35,10 @@ class Header extends React.Component<IHeaderProps, IHeaderState, never> {
   componentDidMount() {
     if (this.element) {
       const { minWidth = 0, onUpdateSize } = this.props;
-      const { height, width } = this.element.getBBox();
+      const { width } = this.element.getBBox();
 
       const newWidth = (width || 10) + padding.width;
       const calculatedWidth = newWidth > minWidth ? newWidth : minWidth;
-
-      this.setState({
-        textHeight: height,
-        textWidth: calculatedWidth
-      });
 
       if (onUpdateSize) {
         onUpdateSize(calculatedWidth);
@@ -68,7 +57,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState, never> {
     const { children, onMouseDown, minWidth } = this.props;
 
     return (
-      <React.Fragment>
+      <g className="diagram__header">
         <rect
           {...pos}
           transform="translate(-10 0)"
@@ -87,7 +76,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState, never> {
           ref={this.createdText}>
           {children}
         </text>
-      </React.Fragment>
+      </g>
     );
   }
 }

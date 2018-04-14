@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Group from './Group';
+import Group from './util/Group';
 import Pos from '../util/Pos';
 
 interface IEntityProps {
@@ -11,23 +11,15 @@ interface IEntityState {
   minWidth: number;
 }
 
-let tempWidth = 0;
+export interface IEntityChild {
+  minWidth?: number;
+  onUpdateSize?: (width: number) => void;
+  onMouseDown?: (type: any) => void;
+}
 
-class Entity extends React.Component<IEntityProps, IEntityState, never> {
-  state = {
-    minWidth: 0
-  };
-
-  updateSize = (width: number) => {
-    if (width > tempWidth) {
-      tempWidth = width;
-      this.setState({ minWidth: width });
-    }
-  };
-
+class Entity extends React.Component<IEntityProps, IEntityState> {
   render() {
     const { pos, children } = this.props;
-    const { minWidth } = this.state;
 
     const childComponents: any[] = children
       ? Array.isArray(children)
@@ -39,15 +31,15 @@ class Entity extends React.Component<IEntityProps, IEntityState, never> {
       <Group
         pos={pos}
         movable={true}
-        render={onMouseDown =>
+        render={({ onMouseDown, minWidth, onUpdateSize }) =>
           childComponents.map((Child: React.ReactElement<any>, index) => (
             <Child.type
               {...Child.props}
               y={index * 28}
               key={Child.props.children}
-              minWidth={minWidth}
-              onUpdateSize={this.updateSize}
               onMouseDown={onMouseDown}
+              onUpdateSize={onUpdateSize}
+              minWidth={minWidth}
             />
           ))
         }

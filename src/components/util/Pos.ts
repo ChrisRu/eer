@@ -11,6 +11,10 @@ export default class Pos {
     return Pos.Combine(this, pos);
   }
 
+  equals(pos: Pos) {
+    return pos && pos.x === this.x && pos.y === this.y;
+  }
+
   static Combine(pos1: Pos, pos2: Pos) {
     return new Pos(pos1.x + pos2.x, pos1.y + pos2.y);
   }
