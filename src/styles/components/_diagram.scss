@@ -1,6 +1,13 @@
 .diagram {
   height: 100vh;
   width: 100vw;
+  background-color: $diagram-background;
+
+  &__grid {
+    &-line {
+      stroke: $diagram-grid-color;
+    }
+  }
 
   &__text {
     font-family: $family-primary;
@@ -23,6 +30,7 @@
 
       &:active {
         cursor: -webkit-grabbing;
+        fill: $diagram-block-header-active;
       }
     }
 
@@ -32,6 +40,10 @@
 
       &:hover {
         fill: $diagram-block-item-hover;
+      }
+
+      &:active {
+        cursor: -webkit-grabbing;
       }
     }
   }

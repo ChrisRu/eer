@@ -34,6 +34,8 @@
     border-radius: 0;
     min-width: 100%;
     white-space: nowrap;
+    transition-timing-function: ease-out;
+    transition-duration: $transition-speed / 2;
 
     &-toggle {
       margin-left: -0.5em;

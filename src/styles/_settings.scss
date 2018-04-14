@@ -9,30 +9,46 @@
   making finding things far simpler.
 */
 
+// COLORS
+
+$color-primary-text: #282828;
+$color-primary-background: #fff;
+$color-secondary-background: #f2f2f2;
+$color-tertiary-background: #e2e2e2;
+$color-quaternary-background: #d2d2d2;
+$color-quinary-background: #c2c2c2;
+
 // FONTS
 $family-primary: 'Work Sans', serif;
+
+// NAVIGATION
+$navigation-background: $color-secondary-background;
 
 // OBJECTS
 $object-radius: 5px;
 
 // BUTTONS
-$button-default-color: #282828;
-$button-default-background: #fff;
-$button-default-background-hover: #e2e2e2;
-$button-default-active-background: #d8d8d8;
+$button-default-color: $color-primary-text;
+$button-default-background: $color-primary-background;
+$button-default-background-hover: $color-secondary-background;
+$button-default-active-background: $color-tertiary-background;
 
 // ICONS
-$icon-color: #282828;
+$icon-color: $color-primary-text;
 
 // TRANSITIONS
-$transition-speed: 0.1s;
+$transition-speed: 100ms;
 $transition-easing: ease;
 
 // DIAGRAM
-$diagram-background: #fff;
+$diagram-background: $color-secondary-background;
 
-$diagram-block-item: #f9f9f9;
-$diagram-block-item-hover: #f0f0f0;
+$diagram-grid-color: #aaa;
 
-$diagram-block-header: #e2e2e2;
-$diagram-block-header-hover: #ddd;
+$diagram-block-item: $color-primary-background;
+$diagram-block-item-hover: $color-secondary-background;
+$diagram-block-item-active: $color-tertiary-background;
+
+$diagram-block-header: $color-tertiary-background;
+$diagram-block-header-hover: $color-quaternary-background;
+$diagram-block-header-active: $color-quinary-background;
