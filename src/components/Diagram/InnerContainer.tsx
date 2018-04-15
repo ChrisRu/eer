@@ -4,10 +4,12 @@ import Pos from '../util/Pos';
 
 interface IInnerContainerProps {
   children?: React.ReactChild[] | React.ReactChild;
+  onClick?: (event: React.MouseEvent<any>) => void;
 }
 
 interface IInnerContainerState {
   mouseDown: boolean;
+  mouseMove: boolean;
   pos: Pos;
   zoom: number;
 }
@@ -18,6 +20,7 @@ class InnerContainer extends React.Component<
 > {
   state = {
     mouseDown: false,
+    mouseMove: false,
     pos: new Pos(),
     zoom: 1
   };
@@ -36,6 +39,7 @@ class InnerContainer extends React.Component<
       const { movementX, movementY } = event;
 
       this.setState(prevState => ({
+        mouseMove: true,
         pos: new Pos(prevState.pos.x + movementX, prevState.pos.y + movementY)
       }));
     }
@@ -53,6 +57,16 @@ class InnerContainer extends React.Component<
     });
   };
 
+  onClick = (event: React.MouseEvent<any>) => {
+    if (!this.state.mouseMove && this.props.onClick) {
+      this.props.onClick(event);
+    }
+
+    this.setState({
+      mouseMove: false
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -62,6 +76,7 @@ class InnerContainer extends React.Component<
           width="100%"
           height="100%"
           onMouseDown={this.mouseDown}
+          onClick={this.onClick}
           fill="transparent"
           className="diagram__rect"
         />

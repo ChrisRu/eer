@@ -21,8 +21,11 @@ class App extends React.Component<{}, IAppState> {
   };
 
   updateSettings = (settings: Settings) => {
-    console.log(settings);
     this.setState({ settings });
+  };
+
+  createItem = () => {
+    console.log('container click');
   };
 
   render() {
@@ -35,8 +38,8 @@ class App extends React.Component<{}, IAppState> {
           settings={settings}
         />
         <Diagram>
-          {settings.grid ? <Grid size={20} /> : null}
-          <InnerContainer>
+          <Grid size={20} visible={settings.grid} />
+          <InnerContainer onClick={this.createItem}>
             <Entity pos={new Pos(50, 100)}>
               <Header>Tabletest</Header>
               <Content>

@@ -4,11 +4,12 @@ interface IGridProps {
   size?: number;
   spacing?: number;
   color?: string;
+  visible?: boolean;
 }
 
 class Grid extends React.Component<IGridProps> {
   render() {
-    const { size = 30, spacing = 8 } = this.props;
+    const { size = 30, spacing = 8, visible = true } = this.props;
 
     return (
       <React.Fragment>
@@ -49,7 +50,7 @@ class Grid extends React.Component<IGridProps> {
         <rect
           width="100%"
           height="100%"
-          fill="url(#grid)"
+          fill={visible ? 'url(#grid)' : ''}
           className="diagram__rect diagram__grid"
         />
       </React.Fragment>
