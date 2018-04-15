@@ -19,7 +19,7 @@ class Content extends React.Component<IContentProps> {
   }
 
   render() {
-    const { children, minWidth, onUpdateSize, onMouseDown } = this.props;
+    const { children, minWidth, onUpdateSize } = this.props;
     const items: any[] = Array.isArray(children) ? children : [children];
 
     return (
@@ -31,7 +31,6 @@ class Content extends React.Component<IContentProps> {
             {...Item.props}
             minWidth={minWidth}
             onUpdateSize={onUpdateSize}
-            onMouseDown={onMouseDown}
           />
         ))}
       </g>

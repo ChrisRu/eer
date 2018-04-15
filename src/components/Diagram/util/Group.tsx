@@ -48,13 +48,15 @@ class Group extends React.Component<IGroupProps, IGroupState> {
   };
 
   mouseDown = (type: any) => {
+    if (this.props.movable === false) {
+      return;
+    }
+
     if (type === Header) {
-      if (this.props.movable) {
-        this.setState({
-          mouseDown: true,
-          posUpdate: true
-        });
-      }
+      this.setState({
+        mouseDown: true,
+        posUpdate: true
+      });
     }
   };
 

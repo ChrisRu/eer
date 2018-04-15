@@ -6,11 +6,13 @@ import Pos from '../util/Pos';
 interface IContentItemProps extends IEntityChild {
   children: string;
   pos?: Pos;
+  onMouseMove?: (event: MouseEvent) => void;
 }
 
 interface IContentItemState {
   editing: boolean;
   pos: Pos;
+  value: string | undefined;
 }
 
 const padding = { width: 40, height: 10 };
@@ -24,7 +26,8 @@ class ContentItem extends React.Component<
 
   state = {
     editing: false,
-    pos: new Pos()
+    pos: new Pos(),
+    value: undefined
   };
 
   static getDerivedStateFromProps(
@@ -60,16 +63,16 @@ class ContentItem extends React.Component<
     }
   };
 
-  updateText = () => {
-    this.setState({ editing: true });
+  updateText = (value?: string) => {
+    this.setState({ value, editing: false });
   };
 
   doubleClick = () => {
-    this.setState({ editing: false });
+    this.setState({ editing: true });
   };
 
   render() {
-    const { pos } = this.state;
+    const { pos, editing, value } = this.state;
     const { children, onMouseDown, minWidth } = this.props;
 
     return (
@@ -80,22 +83,24 @@ class ContentItem extends React.Component<
           width={minWidth}
           height={fontSize + padding.height}
           onDoubleClick={this.doubleClick}
-          onMouseDown={() => (onMouseDown ? onMouseDown(ContentItem) : null)}
+          onMouseDown={onMouseDown}
           className="diagram__rect diagram__rect--content"
         />
         <Text
           {...pos}
+          editing={editing}
           dx={0}
           dy={fontSize + padding.height / 3}
           fontFamily="Verdana"
           fontSize={fontSize}
           pointerEvents="none"
-          className="diagram__text diagram__text--header"
+          className="diagram__text diagram__text--content"
           createRef={this.createdText}
-          onChange={(value: string) => {
-            console.log(value);
-          }}
-          value={children}
+          onChange={this.updateText}
+          onCancel={this.updateText}
+          width={minWidth}
+          height={fontSize + padding.height}
+          value={value === undefined ? children : value}
         />
       </g>
     );

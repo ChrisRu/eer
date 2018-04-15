@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Settings from '../Settings';
 
 const CheckMark = ({ on = false, className = '' }) => (
   <svg className={`icon ${className}`} viewBox="0 0 20 20">
@@ -27,7 +28,13 @@ const CheckMark = ({ on = false, className = '' }) => (
   </svg>
 );
 
-const Navigation = () => (
+const Navigation = ({
+  onUpdateSettings,
+  settings
+}: {
+  onUpdateSettings: (settings: Settings) => void;
+  settings: Settings;
+}) => (
   <ul className="navigation">
     <li className="navigation__item">
       <button className="button navigation__button">File</button>
@@ -39,19 +46,17 @@ const Navigation = () => (
       <button className="button navigation__button">View</button>
       <ul className="navigation">
         <li className="navigation__item">
-          <button className="button navigation__button">
-            <CheckMark className="navigation__button-toggle" on={true} />
+          <button
+            className="button navigation__button"
+            onClick={() =>
+              onUpdateSettings({ ...settings, grid: !settings.grid })
+            }>
+            <CheckMark
+              className="navigation__button-toggle"
+              on={settings.grid}
+            />
             Toggle Grid
           </button>
-        </li>
-        <li className="navigation__item">
-          <button className="button navigation__button">
-            <CheckMark className="navigation__button-toggle" on={false} />
-            Items
-          </button>
-        </li>
-        <li className="navigation__item">
-          <button className="button navigation__button">Grid</button>
         </li>
       </ul>
     </li>

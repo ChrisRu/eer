@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 interface ITextProps {
-  onChange: (value: string) => any;
+  onChange: (value: string) => void;
+  onCancel: () => void;
   value?: string;
   createRef?: (element: SVGTextElement | HTMLInputElement | null) => void;
   [x: string]: any;
@@ -26,27 +27,44 @@ class Text extends React.Component<ITextProps, ITextState> {
     };
   }
 
-  onChange = (event: React.ChangeEvent<any>) => {
-    console.log(event);
+  change = (event: React.ChangeEvent<any>) => {
     this.setState({ value: event.target.value });
+  };
+
+  keyDown = (event: React.KeyboardEvent<any>) => {
+    if (event.keyCode === 13) {
+      this.props.onChange(this.state.value);
+    } else if (event.keyCode === 27) {
+      this.props.onCancel();
+    }
   };
 
   render() {
     const { value } = this.state;
-    const { onChange, createRef, editing, ...props } = this.props;
+    const {
+      onChange,
+      createRef,
+      editing,
+      width,
+      height,
+      y,
+      ...props
+    } = this.props;
 
     return editing ? (
-      <foreignObject x={-5} width={100} height={32}>
+      <foreignObject x={-10} y={y + 1} width={width} height={height}>
         <input
           ref={createRef}
           type="text"
-          onChange={this.onChange}
+          onChange={this.change}
+          onKeyDown={this.keyDown}
+          autoFocus={true}
           value={value}
-          className="input input--diagram"
+          className="input diagram__input"
         />
       </foreignObject>
     ) : (
-      <text ref={createRef} {...props}>
+      <text ref={createRef} y={y} {...props}>
         {value}
       </text>
     );

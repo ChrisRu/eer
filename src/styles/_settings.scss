@@ -12,6 +12,9 @@
 // COLORS
 
 $color-primary-text: #282828;
+$color-secondary-text: lighten($color-primary-text, 10%);
+$color-tertiary-text: lighten($color-secondary-text, 10%);
+
 $color-primary-background: #fff;
 $color-secondary-background: #f2f2f2;
 $color-tertiary-background: #e2e2e2;

@@ -5,7 +5,7 @@
   It is inelegant and heavy-handed, and contains utility and helper classes, hacks and overrides.
 */
 .diagram {
-  * {
+  *:not(input) {
     user-select: none;
     -webkit-user-drag: none;
   }

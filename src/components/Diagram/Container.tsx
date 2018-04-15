@@ -2,7 +2,7 @@ import * as React from 'react';
 import WindowSub from '../util/windowSub';
 
 interface IViewProps {
-  children?: React.ReactChild[] | React.ReactChild;
+  children?: Array<React.ReactChild | null> | React.ReactChild | null;
 }
 
 interface IViewState {
