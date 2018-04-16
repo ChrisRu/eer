@@ -1,10 +1,10 @@
 import * as React from 'react';
 import WindowSub from '../util/windowSub';
 import Pos from '../util/Pos';
+import CreateItem from './util/CreateItem';
 
 interface IInnerContainerProps {
   children?: React.ReactChild[] | React.ReactChild;
-  onClick?: (event: React.MouseEvent<any>) => void;
 }
 
 interface IInnerContainerState {
@@ -12,6 +12,7 @@ interface IInnerContainerState {
   mouseMove: boolean;
   pos: Pos;
   zoom: number;
+  createItem: Pos | null;
 }
 
 class InnerContainer extends React.Component<
@@ -22,7 +23,8 @@ class InnerContainer extends React.Component<
     mouseDown: false,
     mouseMove: false,
     pos: new Pos(),
-    zoom: 1
+    zoom: 1,
+    createItem: null
   };
 
   get transform(): string {
@@ -57,9 +59,17 @@ class InnerContainer extends React.Component<
     });
   };
 
+  createItem = (event: React.MouseEvent<any>) => {
+    this.setState({ createItem: new Pos(event.pageX, event.pageY) });
+  };
+
+  exitItem = () => {
+    this.setState({ createItem: null });
+  };
+
   onClick = (event: React.MouseEvent<any>) => {
-    if (!this.state.mouseMove && this.props.onClick) {
-      this.props.onClick(event);
+    if (!this.state.mouseMove) {
+      this.createItem(event);
     }
 
     this.setState({
@@ -68,6 +78,8 @@ class InnerContainer extends React.Component<
   };
 
   render() {
+    const { createItem } = this.state;
+
     return (
       <React.Fragment>
         <rect
@@ -81,6 +93,7 @@ class InnerContainer extends React.Component<
           className="diagram__rect"
         />
         <g transform={this.transform}>{this.props.children}</g>
+        <CreateItem pos={createItem} onExit={this.exitItem} />
       </React.Fragment>
     );
   }
