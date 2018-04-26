@@ -1,5 +1,5 @@
 import * as React from 'react';
-import WindowSub from '../util/windowSub';
+import WindowSubComponent from '../util/WindowSubComponent';
 import Pos from '../util/Pos';
 import CreateItem from './util/CreateItem';
 
@@ -15,7 +15,7 @@ interface IInnerContainerState {
   createItem: Pos | null;
 }
 
-class InnerContainer extends React.Component<
+class InnerContainer extends WindowSubComponent<
   IInnerContainerProps,
   IInnerContainerState
 > {
@@ -77,6 +77,11 @@ class InnerContainer extends React.Component<
     });
   };
 
+  componentDidMount() {
+    this.on('mousemove', this.mouseMove);
+    this.on('mouseup', this.mouseUp);
+  }
+
   render() {
     const { createItem } = this.state;
 
@@ -99,7 +104,4 @@ class InnerContainer extends React.Component<
   }
 }
 
-export default WindowSub([
-  { action: 'mousemove', method: 'mouseMove' },
-  { action: 'mouseup', method: 'mouseUp' }
-])(InnerContainer);
+export default InnerContainer;

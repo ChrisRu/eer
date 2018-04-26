@@ -1,5 +1,5 @@
 import * as React from 'react';
-import WindowSub from '../util/windowSub';
+import WindowSubComponent from '../util/WindowSubComponent';
 
 interface IViewProps {
   children?: Array<React.ReactChild | null> | React.ReactChild | null;
@@ -12,7 +12,7 @@ interface IViewState {
   };
 }
 
-class View extends React.Component<IViewProps, IViewState> {
+class View extends WindowSubComponent<IViewProps, IViewState> {
   state = {
     size: {
       height: 0,
@@ -28,6 +28,10 @@ class View extends React.Component<IViewProps, IViewState> {
       }
     });
   };
+
+  componentDidMount() {
+    this.on('resize', this.updateSize);
+  }
 
   render() {
     const { size } = this.state;
@@ -54,6 +58,4 @@ class View extends React.Component<IViewProps, IViewState> {
   }
 }
 
-export default WindowSub([
-  { action: 'resize', method: 'updateSize', init: true }
-])(View);
+export default View;

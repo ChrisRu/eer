@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Pos from '../../util/Pos';
-import WindowSub from '../../util/windowSub';
+import WindowSubComponent from '../../util/WindowSubComponent';
 import GroupChildren, { render } from './GroupChildren';
 import { Header } from '..';
 
@@ -16,7 +16,7 @@ interface IGroupState {
   posUpdate: boolean;
 }
 
-class Group extends React.Component<IGroupProps, IGroupState> {
+class Group extends WindowSubComponent<IGroupProps, IGroupState> {
   state = {
     mouseDown: false,
     transform: new Pos(),
@@ -72,6 +72,11 @@ class Group extends React.Component<IGroupProps, IGroupState> {
     return `translate(${x} ${y})`;
   }
 
+  componentDidMount() {
+    this.on('mousemove', this.mouseMove);
+    this.on('mouseup', this.mouseUp);
+  }
+
   render() {
     const { posUpdate } = this.state;
 
@@ -87,7 +92,4 @@ class Group extends React.Component<IGroupProps, IGroupState> {
   }
 }
 
-export default WindowSub([
-  { action: 'mousemove', method: 'mouseMove' },
-  { action: 'mouseup', method: 'mouseUp' }
-])(Group);
+export default Group;
