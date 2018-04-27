@@ -50,7 +50,7 @@ class Grid extends React.Component<IGridProps> {
         <rect
           width="100%"
           height="100%"
-          fill={visible ? 'url(#grid)' : ''}
+          fill={visible ? 'url(#grid)' : 'transparent'}
           className="diagram__rect diagram__grid"
         />
       </React.Fragment>

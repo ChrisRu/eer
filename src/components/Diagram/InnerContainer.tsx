@@ -4,7 +4,7 @@ import Pos from '../util/Pos';
 import CreateItem from './util/CreateItem';
 
 interface IInnerContainerProps {
-  children?: React.ReactChild[] | React.ReactChild;
+  children?: React.ReactNode;
 }
 
 interface IInnerContainerState {

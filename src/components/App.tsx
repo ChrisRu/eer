@@ -20,9 +20,7 @@ class App extends React.Component<{}, IAppState> {
     settings: new Settings()
   };
 
-  updateSettings = (settings: Settings) => {
-    this.setState({ settings });
-  };
+  updateSettings = (settings: Settings) => this.setState({ settings });
 
   render() {
     const { settings } = this.state;

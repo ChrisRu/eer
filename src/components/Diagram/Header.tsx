@@ -3,7 +3,7 @@ import Pos from '../util/Pos';
 import { IEntityChild } from './Entity';
 
 interface IHeaderProps extends IEntityChild {
-  children?: React.ReactChild;
+  children?: React.ReactNode;
   pos?: Pos;
 }
 

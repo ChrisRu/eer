@@ -3,7 +3,7 @@ import Group from './util/Group';
 import Pos from '../util/Pos';
 
 interface IEntityProps {
-  children?: React.ReactElement<any> | Array<React.ReactElement<any>>;
+  children?: React.ReactNode;
   pos: Pos;
 }
 
