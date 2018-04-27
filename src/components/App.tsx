@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Pos from './util/Pos';
-import Navigation from './Tools/Navigation';
+import Navigation from './Tools/Navigation/Navigation';
 import Diagram, {
   Grid,
   InnerContainer,

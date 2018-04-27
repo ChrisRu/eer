@@ -1,0 +1,80 @@
+.icon {
+  &--cross {
+    $size: 1.5em;
+    $height: $size * 0.1;
+
+    width: $size;
+    height: $size;
+    position: relative;
+    cursor: pointer;
+
+    &:hover span {
+      background-color: #444;
+    }
+
+    span {
+      position: absolute;
+      background-color: #888;
+      border-radius: $height / 2;
+      transition: background-color 0.2s ease;
+
+      &:first-child {
+        width: $size;
+        height: $height;
+        transform: translate(0, $size / 2 - $height / 2) rotate(225deg);
+      }
+
+      &:last-child {
+        width: $height;
+        height: $size;
+        transform: translate($size / 2 - $height / 2, 0) rotate(45deg);
+      }
+    }
+  }
+
+  &--loading {
+    .spinner {
+      margin: 0;
+      width: 1em;
+      height: 1em;
+
+      div {
+        background-color: #444;
+      }
+    }
+  }
+
+  &--plus {
+    $size: 0.8em;
+    $height: $size * 0.2;
+
+    width: $size;
+    height: $size;
+    position: relative;
+    cursor: pointer;
+    box-sizing: content-box;
+
+    span {
+      position: absolute;
+      background-color: #888;
+      border-radius: $height / 2;
+
+      &:first-child {
+        width: $size;
+        height: $height;
+        transform: translate(0, $size / 2 - $height / 2);
+      }
+
+      &:last-child {
+        width: $height;
+        height: $size;
+        transform: translate($size / 2 - $height / 2, 0);
+      }
+    }
+  }
+
+  &--person {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

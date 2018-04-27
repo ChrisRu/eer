@@ -4,11 +4,13 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
+    "lodash": "^4.17.10",
     "normalize.css": "^8.0.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "react-redux": "^5.0.7",
     "react-scripts-ts": "2.14.0",
+    "react-transition-group": "^2.3.1",
     "redux": "^4.0.0"
   },
   "scripts": {
@@ -24,10 +26,12 @@
   "devDependencies": {
     "@types/classnames": "^2.2.3",
     "@types/jest": "^22.2.3",
+    "@types/lodash": "^4.14.108",
     "@types/node": "^9.6.4",
     "@types/react": "16.3.8",
     "@types/react-dom": "^16.0.5",
     "@types/react-redux": "^5.0.18",
+    "@types/react-transition-group": "^2.0.9",
     "@types/redux": "^3.6.0",
     "@types/why-did-you-update": "^0.0.8",
     "node-sass-chokidar": "^1.2.2",
