@@ -30,7 +30,7 @@ class Entity extends React.Component<IEntityProps, IEntityState> {
     return (
       <Group
         pos={pos}
-        movable={true}
+        movable
         render={({ onMouseDown, minWidth, onUpdateSize }) =>
           childComponents.map((Child: React.ReactElement<any>, index) => (
             <Child.type

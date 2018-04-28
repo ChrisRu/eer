@@ -58,7 +58,7 @@ class Text extends React.Component<ITextProps, ITextState> {
           type="text"
           onChange={this.change}
           onKeyDown={this.keyDown}
-          autoFocus={true}
+          autoFocus
           value={value}
           className="input diagram__input"
         />

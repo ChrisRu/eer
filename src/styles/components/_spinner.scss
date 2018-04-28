@@ -13,7 +13,7 @@
     display: inline-block;
     position: absolute;
     top: 0;
-    background-color: $bgt-text-color;
+    background-color: $spinner-color;
     border-radius: 100%;
 
     animation: sk-bounce 2s infinite ease-in-out;
@@ -27,6 +27,9 @@
 }
 
 @keyframes sk-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
   100% {
     transform: rotate(360deg);
   }

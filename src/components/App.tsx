@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Pos from './util/Pos';
+import Settings from './Settings';
 import Navigation from './Tools/Navigation/Navigation';
 import Diagram, {
   Grid,
@@ -9,21 +10,27 @@ import Diagram, {
   Content,
   ContentItem
 } from './Diagram';
-import Settings from './Settings';
+import Modal, {
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from './Tools/Modal/Modal';
 
 interface IAppState {
   settings: Settings;
+  modal: boolean;
 }
 
 class App extends React.Component<{}, IAppState> {
   state = {
-    settings: new Settings()
+    settings: new Settings(),
+    modal: true
   };
 
   updateSettings = (settings: Settings) => this.setState({ settings });
 
   render() {
-    const { settings } = this.state;
+    const { settings, modal } = this.state;
 
     return (
       <div className="app">

@@ -38,10 +38,16 @@ $button-default-active-background: $color-tertiary-background;
 
 // ICONS
 $icon-color: $color-primary-text;
+$spinner-color: $color-primary-text;
 
 // TRANSITIONS
 $transition-speed: 100ms;
 $transition-easing: ease;
+
+// MODAL
+$modal-overlay-color: $color-primary-text;
+$modal-animation-length: 300ms;
+$modal-animation-easing: $transition-easing;
 
 // DIAGRAM
 $diagram-background: $color-secondary-background;

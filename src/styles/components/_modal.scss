@@ -1,0 +1,136 @@
+.modal {
+  background-color: $color-primary-background;
+  z-index: 5;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.2);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+
+  &__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button {
+    .icon {
+      fill: $color-primary-background;
+      height: 1.2rem;
+      width: 1.2rem;
+      margin-right: 1rem;
+      vertical-align: middle;
+    }
+
+    span {
+      vertical-align: middle;
+    }
+
+    &:nth-last-child(2) {
+      margin-right: auto !important;
+    }
+  }
+
+  &__title {
+    font-size: 1.4em;
+    letter-spacing: 0.5px;
+    margin: 2rem 2rem 1rem;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: $modal-overlay-color;
+    opacity: 0.6;
+    z-index: 0;
+    transition: opacity $modal-animation-length $modal-animation-easing;
+
+    &:not(.visible) {
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+  }
+
+  &__header {
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__body {
+    padding: 0 1rem;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    background-color: $color-tertiary-background;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+}
+
+%pop-in-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+%pop-in-hidden {
+  opacity: 0.01;
+  transform: scale(0.01);
+}
+
+.pop-in {
+  &-appear {
+    @extend %pop-in-hidden;
+
+    &-active {
+      @extend %pop-in-visible;
+      transition: transform $modal-animation-length $modal-animation-easing,
+        opacity $modal-animation-length $modal-animation-easing;
+    }
+  }
+
+  &-enter {
+    @extend %pop-in-hidden;
+
+    &-active {
+      @extend %pop-in-visible;
+      transition: transform $modal-animation-length $modal-animation-easing,
+        opacity $modal-animation-length $modal-animation-easing;
+    }
+  }
+
+  &-exit {
+    @extend %pop-in-visible;
+
+    &-active {
+      @extend %pop-in-hidden;
+      transition: transform $modal-animation-length $modal-animation-easing-out,
+        opacity $modal-animation-length $modal-animation-easing-out;
+    }
+  }
+}

@@ -1,8 +1,12 @@
 import * as React from 'react';
-import Settings from '../Settings';
-import CheckMark from '../util/icons/CheckMark';
+import Settings from '../../Settings';
+import { CheckIcon } from '../../util/icons';
 import NavigationItem from './NavigationItem';
 import NavigationList from './NavigationList';
+
+const toggleVisibility = (bool: boolean) => ({
+  visibility: bool ? 'visible' : 'hidden'
+});
 
 const Navigation = ({
   onUpdateSettings,
@@ -37,7 +41,7 @@ const Navigation = ({
           onClick={() =>
             onUpdateSettings({ ...settings, grid: !settings.grid })
           }>
-          <CheckMark className="navigation__button-toggle" on={settings.grid} />
+          <CheckIcon style={toggleVisibility(settings.grid)} />
           Toggle Grid
         </NavigationItem>
       }>

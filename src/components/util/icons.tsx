@@ -4,9 +4,10 @@ import * as React from 'react';
 interface IIcon {
   onClick?: () => void;
   title?: string;
+  style?: object;
 }
 
-export const SearchIcon = ({ onClick, title }: IIcon) => (
+export const SearchIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     className="icon icon--search"
     width="66"
@@ -14,6 +15,7 @@ export const SearchIcon = ({ onClick, title }: IIcon) => (
     viewBox="0 0 66 67"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Search'}</title>
     <g transform="translate(236 57)">
@@ -57,13 +59,14 @@ export const SearchIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const FilterIcon = ({ onClick, title }: IIcon) => (
+export const FilterIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     width="198"
     height="198"
     viewBox="0 0 198 198"
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon--filter"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Filter'}</title>
     <path
@@ -73,27 +76,36 @@ export const FilterIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const CrossIcon = ({ onClick, title }: IIcon) => (
-  <div className="icon icon--cross" onClick={onClick} title={title || 'Close'}>
+export const CrossIcon = ({ onClick, title, style }: IIcon) => (
+  <div
+    className="icon icon--cross"
+    style={style}
+    onClick={onClick}
+    title={title || 'Close'}>
     <span />
     <span />
   </div>
 );
 
-export const PlusIcon = ({ onClick, title }: IIcon) => (
-  <div className="icon icon--plus" onClick={onClick} title={title || 'Add'}>
+export const PlusIcon = ({ onClick, title, style }: IIcon) => (
+  <div
+    className="icon icon--plus"
+    style={style}
+    onClick={onClick}
+    title={title || 'Add'}>
     <span />
     <span />
   </div>
 );
 
-export const DashboardIcon = ({ onClick, title }: IIcon) => (
+export const DashboardIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     width="138"
     height="110"
     viewBox="0 0 138 110"
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon--dashboard"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Dashboard'}</title>
     <path d="M117.285 20.772a5.38 5.38 0 0 0-6.849-.643c-8.065 5.512-48.523 33.234-52.871 37.593-6.305 6.323-6.305 16.61 0 22.934A16.101 16.101 0 0 0 69 85.398c4.141 0 8.283-1.581 11.436-4.742 4.348-4.36 31.993-44.929 37.492-53.017a5.418 5.418 0 0 0-.643-6.867zm-44.473 52.24a5.385 5.385 0 0 1-7.623 0 5.421 5.421 0 0 1-.001-7.644c1.69-1.674 13.176-9.889 27.308-19.74-9.823 14.172-18.015 25.69-19.684 27.383z" />
@@ -101,13 +113,14 @@ export const DashboardIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const MapsIcon = ({ onClick, title }: IIcon) => (
+export const MapsIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     width="132"
     height="157"
     viewBox="0 0 132 157"
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon--maps"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Map'}</title>
     <path d="M43.051 35.602a6.134 6.134 0 0 0 1.156 8.6 6.14 6.14 0 0 0 8.6-1.166 16.79 16.79 0 0 1 1.484-1.696c6.463-6.463 16.974-6.47 23.43-.013 6.456 6.456 6.45 16.967-.012 23.43-6.463 6.463-16.975 6.469-23.43.013a16.782 16.782 0 0 1-1.751-2.057 6.134 6.134 0 0 0-8.564-1.392 6.137 6.137 0 0 0-1.401 8.565 29.025 29.025 0 0 0 3.033 3.567c11.238 11.239 29.535 11.229 40.786-.022 11.25-11.251 11.26-29.548.022-40.786-11.239-11.239-29.535-11.229-40.786.022a29.315 29.315 0 0 0-2.567 2.935z" />
@@ -117,13 +130,14 @@ export const MapsIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const ListIcon = ({ onClick, title }: IIcon) => (
+export const ListIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     width="130"
     height="157"
     viewBox="0 0 130 157"
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon--list"
+    style={style}
     onClick={onClick}>
     <title>{title || 'List'}</title>
     <path d="M98.999 33.122H55.495a6.133 6.133 0 0 0-6.132 6.134 6.133 6.133 0 0 0 6.132 6.133H99a6.133 6.133 0 0 0 6.132-6.133A6.133 6.133 0 0 0 99 33.122zM98.999 57.657H55.495a6.133 6.133 0 0 0-6.132 6.133 6.133 6.133 0 0 0 6.132 6.134H99a6.132 6.132 0 0 0 6.132-6.134A6.133 6.133 0 0 0 99 57.657zM74.198 82.192H55.495a6.133 6.133 0 0 0-6.132 6.133 6.133 6.133 0 0 0 6.132 6.134h18.703a6.133 6.133 0 0 0 6.132-6.134 6.133 6.133 0 0 0-6.132-6.133z" />
@@ -134,11 +148,12 @@ export const ListIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const WarningIcon = ({ onClick, title }: IIcon) => (
+export const WarningIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 486.463 486.463"
     className="icon icon--warning"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Warning'}</title>
     <path d="M243.225 333.382c-13.6 0-25 11.4-25 25s11.4 25 25 25c13.1 0 25-11.4 24.4-24.4.6-14.3-10.7-25.6-24.4-25.6z" />
@@ -147,13 +162,14 @@ export const WarningIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const EditIcon = ({ onClick, title }: IIcon) => (
+export const EditIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     width="158"
     height="158"
     viewBox="0 0 158 158"
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon--edit"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Edit'}</title>
     <path
@@ -163,13 +179,14 @@ export const EditIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const TrashIcon = ({ onClick, title }: IIcon) => (
+export const TrashIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     width="195"
     height="212"
     viewBox="0 0 195 212"
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon--trash"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Remove'}</title>
     <path
@@ -180,13 +197,14 @@ export const TrashIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const SaveIcon = ({ onClick, title }: IIcon) => (
+export const SaveIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     width="178"
     height="178"
     viewBox="0 0 178 178"
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon--save"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Save'}</title>
     <path d="M106.035 51.453a6.953 6.953 0 0 0 6.953-6.953V31.29a6.953 6.953 0 1 0-13.906-.001v13.21a6.953 6.953 0 0 0 6.953 6.953z" />
@@ -197,20 +215,22 @@ export const SaveIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const CheckIcon = ({ onClick, title }: IIcon) => (
+export const CheckIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
     className="icon icon--check"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Completed'}</title>
     <path d="M504.527 67.909c-8.611-6.92-21.2-5.547-28.118 3.063L210.291 402.169c-3.612 3.863-8.494 6.101-13.797 6.314-5.459.22-10.629-1.73-14.523-5.431L33.839 261.061c-7.975-7.643-20.634-7.374-28.278.599-7.643 7.974-7.375 20.634.599 28.278l148.191 142.048c11.26 10.703 25.83 16.515 41.268 16.515.825 0 1.655-.017 2.484-.051 16.352-.657 31.371-7.734 42.288-19.926.237-.265.467-.537.691-.814L507.59 96.027c6.918-8.611 5.547-21.199-3.063-28.118z" />
   </svg>
 );
 
-export const LoadingIcon = ({ onClick, title }: IIcon) => (
+export const LoadingIcon = ({ onClick, title, style }: IIcon) => (
   <div
     className="icon icon--loading"
+    style={style}
     onClick={onClick}
     title={title || 'Loading'}>
     <div className="spinner">
@@ -220,13 +240,14 @@ export const LoadingIcon = ({ onClick, title }: IIcon) => (
   </div>
 );
 
-export const PersonIcon = ({ onClick, title }: IIcon) => (
+export const PersonIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     width="512"
     height="512"
     viewBox="0 0 512 512"
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon--person"
+    style={style}
     onClick={onClick}>
     <title>{title || 'User'}</title>
     <path
@@ -236,13 +257,14 @@ export const PersonIcon = ({ onClick, title }: IIcon) => (
   </svg>
 );
 
-export const NotificationIcon = ({ onClick, title }: IIcon) => (
+export const NotificationIcon = ({ onClick, title, style }: IIcon) => (
   <svg
     width="201"
     height="243"
     viewBox="0 0 201 243"
     xmlns="http://www.w3.org/2000/svg"
     className="icon icon--notification"
+    style={style}
     onClick={onClick}>
     <title>{title || 'Notification'}</title>
     <path
