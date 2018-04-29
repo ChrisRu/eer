@@ -1,5 +1,3 @@
 # EER
 
-## Icons
-
-http://svgicons.sparkk.fr/
+Create and edit EER diagrams online in your browser.
