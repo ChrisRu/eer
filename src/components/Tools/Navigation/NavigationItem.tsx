@@ -14,7 +14,7 @@ const NavigationItem = ({
     <button className="button navigation__button" onClick={onClick}>
       {children}
     </button>
-    <NavigationList>{subList}</NavigationList>
+    {subList ? <NavigationList>{subList}</NavigationList> : null}
   </li>
 );
 

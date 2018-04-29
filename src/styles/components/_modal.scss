@@ -129,8 +129,8 @@
 
     &-active {
       @extend %pop-in-hidden;
-      transition: transform $modal-animation-length $modal-animation-easing-out,
-        opacity $modal-animation-length $modal-animation-easing-out;
+      transition: transform $modal-animation-length #{$modal-animation-easing}-out,
+        opacity $modal-animation-length #{$modal-animation-easing}-out;
     }
   }
 }

@@ -1,12 +1,8 @@
 import * as React from 'react';
 import Settings from '../../Settings';
-import { CheckIcon } from '../../util/icons';
 import NavigationItem from './NavigationItem';
 import NavigationList from './NavigationList';
-
-const toggleVisibility = (bool: boolean) => ({
-  visibility: bool ? 'visible' : 'hidden'
-});
+import NavigationItemToggle from './NavigationItemToggle';
 
 const Navigation = ({
   onUpdateSettings,
@@ -37,13 +33,12 @@ const Navigation = ({
     </NavigationItem>
     <NavigationItem
       subList={
-        <NavigationItem
-          onClick={() =>
-            onUpdateSettings({ ...settings, grid: !settings.grid })
-          }>
-          <CheckIcon style={toggleVisibility(settings.grid)} />
+        <NavigationItemToggle
+          settings={settings}
+          value="grid"
+          onUpdate={onUpdateSettings}>
           Toggle Grid
-        </NavigationItem>
+        </NavigationItemToggle>
       }>
       View
     </NavigationItem>

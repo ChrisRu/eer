@@ -10,27 +10,20 @@ import Diagram, {
   Content,
   ContentItem
 } from './Diagram';
-import Modal, {
-  ModalHeader,
-  ModalBody,
-  ModalFooter
-} from './Tools/Modal/Modal';
 
 interface IAppState {
   settings: Settings;
-  modal: boolean;
 }
 
 class App extends React.Component<{}, IAppState> {
   state = {
-    settings: new Settings(),
-    modal: true
+    settings: new Settings()
   };
 
   updateSettings = (settings: Settings) => this.setState({ settings });
 
   render() {
-    const { settings, modal } = this.state;
+    const { settings } = this.state;
 
     return (
       <div className="app">
