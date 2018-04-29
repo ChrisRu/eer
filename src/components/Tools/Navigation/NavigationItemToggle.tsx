@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { assoc, clone, path } from 'ramda';
+import { assocPath, clone, path } from 'ramda';
 import NavigationItem from './NavigationItem';
 import Settings from '../../Settings';
 import { CheckIcon, UncheckIcon } from '../../util/icons';
@@ -18,9 +18,12 @@ const NavigationItemToggle = ({
   value
 }: INavigationItemToggleProps) => (
   <NavigationItem
-    onClick={() =>
-      onUpdate(assoc(value, !path(value.split('.'), settings), clone(settings)))
-    }>
+    onClick={() => {
+      const valuePath = value.split('.');
+      onUpdate(
+        assocPath(valuePath, !path(valuePath, settings), clone(settings))
+      );
+    }}>
     {settings.grid ? (
       <CheckIcon className="navigation__button-toggle" />
     ) : (
