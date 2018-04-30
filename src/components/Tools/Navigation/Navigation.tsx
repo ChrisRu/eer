@@ -4,25 +4,26 @@ import NavigationItem from './NavigationItem';
 import NavigationList from './NavigationList';
 import NavigationItemToggle from './NavigationItemToggle';
 
-const Navigation = ({
-  onUpdateSettings,
-  settings
-}: {
+interface INavigationProps {
   onUpdateSettings: (settings: Settings) => void;
   settings: Settings;
-}) => (
+  onToggleModal: (modalName: string) => () => void;
+}
+
+const Navigation = ({
+  onUpdateSettings,
+  settings,
+  onToggleModal
+}: INavigationProps) => (
   <NavigationList>
     <NavigationItem
       subList={
         <React.Fragment>
           <NavigationItem>Open</NavigationItem>
           <NavigationItem>Save</NavigationItem>
-          <NavigationItemToggle
-            settings={settings}
-            value="modals.export"
-            onUpdate={onUpdateSettings}>
+          <NavigationItem onClick={onToggleModal('export')}>
             Export
-          </NavigationItemToggle>
+          </NavigationItem>
         </React.Fragment>
       }>
       File
@@ -40,7 +41,7 @@ const Navigation = ({
       subList={
         <NavigationItemToggle
           settings={settings}
-          value="grid"
+          settingPath="field.grid.visible"
           onUpdate={onUpdateSettings}>
           Toggle Grid
         </NavigationItemToggle>

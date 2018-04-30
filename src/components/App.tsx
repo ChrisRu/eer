@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { assocPath, clone } from 'ramda';
+import { assocPath, path, clone } from 'ramda';
 import Pos from './util/Pos';
 import Settings from './Settings';
 import Navigation from './Tools/Navigation/Navigation';
@@ -24,46 +24,50 @@ class App extends React.Component<{}, IAppState> {
 
   updateSettings = (settings: Settings) => this.setState({ settings });
 
-  closeModal = (type: string) => () =>
-    this.updateSettings(
-      assocPath(['modals', 'export'], false, clone(this.state.settings))
-    );
+  toggleModal = (modalName: string, open?: boolean) => () => {
+    const { settings } = this.state;
+    const settingPath = ['modals', modalName];
+
+    const newValue = open === undefined ? !path(settingPath, settings) : open;
+
+    this.updateSettings(assocPath(settingPath, newValue, clone(settings)));
+  };
 
   render() {
     const { settings } = this.state;
-    const { grid, modals } = settings;
+    const { modals, field } = settings;
 
     return (
       <div className="app">
         <Navigation
           onUpdateSettings={this.updateSettings}
+          onToggleModal={this.toggleModal}
           settings={settings}
         />
 
-        <Diagram>
-          <Grid size={20} visible={grid} />
-          <InnerContainer>
-            <Entity pos={new Pos(50, 100)}>
-              <Header>Tabletest</Header>
-              <Content>
-                <ContentItem>hmm</ContentItem>
-                <ContentItem>dude</ContentItem>
-              </Content>
-            </Entity>
-            <Entity pos={new Pos(500, 500)}>
-              <Header>Test 2</Header>
-              <Content>
-                <ContentItem>Hahahaha</ContentItem>
-                <ContentItem>dude</ContentItem>
-                <ContentItem>that's perfect</ContentItem>
-              </Content>
-            </Entity>
-          </InnerContainer>
-        </Diagram>
+        {field && (
+          <Diagram>
+            <Grid {...field.grid} />
+            <InnerContainer>
+              {field.entities.map(entity => (
+                <Entity
+                  pos={new Pos(...entity.pos)}
+                  key={entity.header + entity.pos.join('')}>
+                  <Header>{entity.header}</Header>
+                  <Content>
+                    {entity.content.map(content => (
+                      <ContentItem key={content}>{content}</ContentItem>
+                    ))}
+                  </Content>
+                </Entity>
+              ))}
+            </InnerContainer>
+          </Diagram>
+        )}
 
         <ExportModal
           visible={modals.export}
-          onClose={this.closeModal('export')}
+          onClose={this.toggleModal('export')}
         />
       </div>
     );

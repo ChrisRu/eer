@@ -7,7 +7,7 @@ import { CheckIcon, UncheckIcon } from '../../util/icons';
 interface INavigationItemToggleProps {
   onUpdate: (settings: Settings) => void;
   settings: Settings;
-  value: string;
+  settingPath: string;
   children: React.ReactNode;
 }
 
@@ -15,22 +15,29 @@ const NavigationItemToggle = ({
   onUpdate,
   settings,
   children,
-  value
-}: INavigationItemToggleProps) => (
-  <NavigationItem
-    onClick={() => {
-      const valuePath = value.split('.');
-      onUpdate(
-        assocPath(valuePath, !path(valuePath, settings), clone(settings))
-      );
-    }}>
-    {settings.grid ? (
-      <CheckIcon className="navigation__button-toggle" />
-    ) : (
-      <UncheckIcon className="navigation__button-toggle" />
-    )}
-    {children}
-  </NavigationItem>
-);
+  settingPath
+}: INavigationItemToggleProps) => {
+  const settingPathSplit = settingPath.split('.');
+
+  return (
+    <NavigationItem
+      onClick={() =>
+        onUpdate(
+          assocPath(
+            settingPathSplit,
+            !path(settingPathSplit, settings),
+            clone(settings)
+          )
+        )
+      }>
+      {path(settingPathSplit, settings) ? (
+        <CheckIcon className="navigation__button-toggle" />
+      ) : (
+        <UncheckIcon className="navigation__button-toggle" />
+      )}
+      {children}
+    </NavigationItem>
+  );
+};
 
 export default NavigationItemToggle;
