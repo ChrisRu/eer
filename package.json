@@ -15,7 +15,7 @@
     "redux": "^4.0.0"
   },
   "scripts": {
-    "lint": "tslint -p ./tslint.json",
+    "lint": "tslint --project ./",
     "analyze": "source-map-explorer build/static/js/main.*",
     "watch-css": "npm run build-css && node-sass --include-path ./src/styles --include-path ./node_modules src/styles -o src/styles --watch true --recursive true --source-map-contents sass --source-map-embed true",
     "build-css": "node-sass --include-path ./src/styles --include-path ./node_modules src/styles -o src/styles",
