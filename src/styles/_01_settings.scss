@@ -21,6 +21,10 @@ $color-tertiary-background: #e2e2e2;
 $color-quaternary-background: #d2d2d2;
 $color-quinary-background: #c2c2c2;
 
+$highlight-color: rgb(45, 136, 211);
+$highlight-color-dimmed: darken($highlight-color, 10%);
+$highlight-color-dark: darken($highlight-color, 15%);
+
 // FONTS
 $family-primary: 'Work Sans', serif;
 

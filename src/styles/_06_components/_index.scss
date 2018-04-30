@@ -10,8 +10,10 @@
   Adding new components and features usually makes up the vast majority of development.
 */
 
+@import 'animations';
 @import 'diagram';
-@import 'navigation';
-@import 'spinner';
+@import 'form';
 @import 'icons';
 @import 'modal';
+@import 'navigation';
+@import 'spinner';

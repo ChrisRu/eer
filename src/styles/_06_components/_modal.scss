@@ -6,6 +6,7 @@
   box-shadow: 0 0 20px 8px rgba(0, 0, 0, 0.2);
   will-change: transform, opacity;
   backface-visibility: hidden;
+  pointer-events: all;
 
   &__wrapper {
     position: fixed;
@@ -16,35 +17,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  &__button {
-    .icon {
-      fill: $color-primary-background;
-      height: 1.2rem;
-      width: 1.2rem;
-      margin-right: 1rem;
-      vertical-align: middle;
-    }
-
-    span {
-      vertical-align: middle;
-    }
-
-    &:nth-last-child(2) {
-      margin-right: auto !important;
-    }
+    pointer-events: none;
   }
 
   &__title {
     font-size: 1.4em;
     letter-spacing: 0.5px;
     margin: 2rem 2rem 1rem;
-
-    span {
-      display: inline-block;
-      vertical-align: middle;
-    }
+    display: flex;
   }
 
   &__overlay {
@@ -57,6 +37,7 @@
     opacity: 0.6;
     z-index: 0;
     transition: opacity $modal-animation-length $modal-animation-easing;
+    pointer-events: all;
 
     &:not(.visible) {
       pointer-events: none;
@@ -75,10 +56,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    &-title {
+      margin: 1rem 3rem 0.5rem 0;
+    }
+
+    &-close {
+      margin: 1rem 0 0.5rem;
+    }
   }
 
   &__body {
-    padding: 0 1rem;
+    padding: 0 1rem 1rem;
     flex: 1;
     overflow-y: auto;
   }
@@ -90,47 +79,5 @@
     background-color: $color-tertiary-background;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-  }
-}
-
-%pop-in-visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-%pop-in-hidden {
-  opacity: 0.01;
-  transform: scale(0.01);
-}
-
-.pop-in {
-  &-appear {
-    @extend %pop-in-hidden;
-
-    &-active {
-      @extend %pop-in-visible;
-      transition: transform $modal-animation-length $modal-animation-easing,
-        opacity $modal-animation-length $modal-animation-easing;
-    }
-  }
-
-  &-enter {
-    @extend %pop-in-hidden;
-
-    &-active {
-      @extend %pop-in-visible;
-      transition: transform $modal-animation-length $modal-animation-easing,
-        opacity $modal-animation-length $modal-animation-easing;
-    }
-  }
-
-  &-exit {
-    @extend %pop-in-visible;
-
-    &-active {
-      @extend %pop-in-hidden;
-      transition: transform $modal-animation-length #{$modal-animation-easing}-out,
-        opacity $modal-animation-length #{$modal-animation-easing}-out;
-    }
   }
 }

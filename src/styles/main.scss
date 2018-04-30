@@ -1,7 +1,13 @@
-@import 'settings';
-@import 'tools';
-@import 'generic';
-@import 'elements';
-@import 'objects';
-@import 'components/index';
-@import 'trumps';
+/*
+  This styling follows the ITCSS Architecture with the BEM Methodology for highly maintainable CSS.
+  Learn about ITCSS: https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
+  Learn about BEM: http://getbem.com/naming/
+*/
+
+@import '01_settings';
+@import '02_tools';
+@import '03_generic';
+@import '04_elements';
+@import '05_objects';
+@import '_06_components/index';
+@import '07_utilities';

@@ -1,0 +1,29 @@
+%pop-in-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+%pop-in-hidden {
+  opacity: 0.01;
+  transform: scale(0.01);
+}
+
+.pop-in {
+  &-appear,
+  &-enter {
+    @extend %pop-in-hidden;
+  }
+  &-exit {
+    @extend %pop-in-visible;
+  }
+  &-appear.pop-in-appear-active,
+  &-enter.pop-in-enter-active {
+    @extend %pop-in-visible;
+    transition: transform $modal-animation-length $modal-animation-easing, opacity $modal-animation-length $modal-animation-easing;
+  }
+  &-exit.pop-in-exit-active {
+    @extend %pop-in-hidden;
+    transition: transform $modal-animation-length #{$modal-animation-easing}-out,
+    opacity $modal-animation-length #{$modal-animation-easing}-out;
+  }
+}
