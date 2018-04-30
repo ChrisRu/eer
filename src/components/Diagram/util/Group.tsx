@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Pos from '../../util/Pos';
-import WindowSubComponent from '../../util/WindowSubComponent';
+import WindowSubComponent from '../../util/sub/WindowSubComponent';
 import GroupChildren, { render } from './GroupChildren';
 import { Header } from '..';
 

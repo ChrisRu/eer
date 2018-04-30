@@ -1,5 +1,5 @@
 import * as React from 'react';
-import WindowSubComponent from '../util/WindowSubComponent';
+import WindowSubComponent from '../util/sub/WindowSubComponent';
 
 interface IViewProps {
   children?: React.ReactNode;

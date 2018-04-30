@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
-import * as classnames from 'classnames';
+import * as cx from 'classnames';
 
 interface IModalProps {
   visible: boolean;
@@ -18,7 +18,11 @@ const Modal = ({
   transitionStyles = {}
 }: IModalProps) => (
   <div className="modal__wrapper">
-    <CSSTransition in={visible} timeout={300} unmountOnExit classNames="pop-in">
+    <CSSTransition
+      in={visible}
+      timeout={30000}
+      unmountOnExit
+      classNames="pop-in">
       {(state: any) => (
         <div
           style={{
@@ -30,10 +34,7 @@ const Modal = ({
         </div>
       )}
     </CSSTransition>
-    <div
-      className={classnames('modal__overlay', { visible })}
-      onClick={onClose}
-    />
+    <div className={cx('modal__overlay', { visible })} onClick={onClose} />
   </div>
 );
 

@@ -17,7 +17,12 @@ const Navigation = ({
         <React.Fragment>
           <NavigationItem>Open</NavigationItem>
           <NavigationItem>Save</NavigationItem>
-          <NavigationItem>Export</NavigationItem>
+          <NavigationItemToggle
+            settings={settings}
+            value="modals.export"
+            onUpdate={onUpdateSettings}>
+            Export
+          </NavigationItemToggle>
         </React.Fragment>
       }>
       File

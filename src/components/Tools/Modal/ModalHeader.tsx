@@ -2,13 +2,13 @@ import * as React from 'react';
 import { CrossIcon } from '../../util/icons';
 
 interface IModalHeaderProps {
-  title?: string;
+  children?: React.ReactNode;
   onClose?: () => void;
 }
 
-const ModalHeader = ({ title, onClose }: IModalHeaderProps) => (
+const ModalHeader = ({ children, onClose }: IModalHeaderProps) => (
   <div className="modal__header">
-    <h2 className="modal__header-title">{title}</h2>
+    <h2 className="modal__header-title">{children}</h2>
     {onClose ? (
       <div className="modal__header-close">
         <CrossIcon onClick={onClose} />

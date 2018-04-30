@@ -1,3 +1,6 @@
 export default class Settings {
-  public grid: boolean = true;
+  grid: boolean = true;
+  modals: {
+    [x: string]: boolean;
+  } = {};
 }

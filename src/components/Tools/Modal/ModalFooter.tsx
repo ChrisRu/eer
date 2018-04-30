@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classnames from 'classnames';
+import * as cx from 'classnames';
 
 interface IModalFooterProps {
   actions?: IAction[];
@@ -15,16 +15,14 @@ interface IAction {
 const ModalFooter = ({ actions }: IModalFooterProps) =>
   actions ? (
     <div className="modal__footer">
-      {actions.sort(a => +(a.align === 'left')).map((props: IAction) => (
+      {actions.sort(a => +(a.align === 'right')).map((props: IAction) => (
         <button
-          className={classnames(
+          className={cx(
             'button',
             `button--${props.type}`,
-            'modal__footer-button',
-            {
-              'modal__footer-button--left': props.align === 'left'
-            }
+            `button--${props.align}`
           )}
+          key={props.name}
           onClick={props.onClick}>
           {props.name}
         </button>
