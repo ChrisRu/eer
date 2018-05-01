@@ -8,6 +8,7 @@ interface IGroupProps {
   movable?: boolean;
   pos: Pos;
   render: render;
+  onMove?: (entity: any) => void;
 }
 
 interface IGroupState {
@@ -27,7 +28,9 @@ class Group extends WindowSubComponent<IGroupProps, IGroupState> {
     nextProps: IGroupProps,
     nextState: IGroupState
   ) {
-    const { x, y } = nextProps.pos || new Pos();
+    const { x, y } = nextState.transform.initialized
+      ? nextState.transform
+      : nextProps.pos || new Pos();
     return {
       ...nextState,
       transform: new Pos(x, y)
@@ -39,8 +42,8 @@ class Group extends WindowSubComponent<IGroupProps, IGroupState> {
       const { movementX, movementY } = event;
 
       if (movementX !== 0 || movementY !== 0) {
-        this.setState(prevState => ({
-          transform: prevState.transform.add(new Pos(movementX, movementY)),
+        this.setState(({ transform }) => ({
+          transform: transform.add(new Pos(movementX, movementY)),
           posUpdate: true
         }));
       }
@@ -61,10 +64,20 @@ class Group extends WindowSubComponent<IGroupProps, IGroupState> {
   };
 
   mouseUp = () => {
-    this.setState({
-      mouseDown: false,
-      posUpdate: true
-    });
+    const { onMove } = this.props;
+
+    this.setState(
+      {
+        mouseDown: false,
+        posUpdate: true
+      },
+      () => {
+        if (onMove) {
+          const { x, y } = this.state.transform;
+          onMove({ pos: [x, y] });
+        }
+      }
+    );
   };
 
   get transform() {

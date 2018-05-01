@@ -78,7 +78,7 @@ class ContentItem extends React.Component<
     return (
       <g className="diagram__content-item">
         <rect
-          {...pos}
+          {...pos.props}
           transform="translate(-10 0)"
           width={minWidth}
           height={fontSize + padding.height}
@@ -87,7 +87,7 @@ class ContentItem extends React.Component<
           className="diagram__rect diagram__rect--content"
         />
         <Text
-          {...pos}
+          {...pos.props}
           editing={editing}
           dx={0}
           dy={fontSize + padding.height / 3}

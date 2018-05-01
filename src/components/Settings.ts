@@ -1,10 +1,10 @@
-interface IEntity {
+export interface IEntity {
   pos: [number, number];
   header: string;
   content: string[];
 }
 
-interface IField {
+export interface IField {
   grid: {
     visible: boolean;
     size: number;

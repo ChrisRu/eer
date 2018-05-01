@@ -59,7 +59,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
     return (
       <g className="diagram__header">
         <rect
-          {...pos}
+          {...pos.props}
           transform="translate(-10 0)"
           width={minWidth}
           height={fontSize + padding.height}
@@ -67,7 +67,7 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
           className="diagram__rect diagram__rect--header"
         />
         <text
-          {...pos}
+          {...pos.props}
           dy={fontSize + padding.height / 4}
           fontFamily="Verdana"
           fontSize={fontSize}

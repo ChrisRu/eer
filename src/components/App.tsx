@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { assocPath, path, clone } from 'ramda';
+import { assocPath, path, clone, mergeDeepLeft } from 'ramda';
 import Pos from './util/Pos';
-import Settings from './Settings';
+import Settings, { IEntity } from './Settings';
 import Navigation from './Tools/Navigation/Navigation';
 import Diagram, {
   Grid,
@@ -33,6 +33,15 @@ class App extends React.Component<{}, IAppState> {
     this.updateSettings(assocPath(settingPath, newValue, clone(settings)));
   };
 
+  updateEntity = (entity: IEntity, index: number) => (newEntity: IEntity) => {
+    const { settings } = this.state;
+    const settingPath = ['field', 'entities', index];
+
+    this.updateSettings(
+      assocPath(settingPath, mergeDeepLeft(entity, newEntity), clone(settings))
+    );
+  };
+
   render() {
     const { settings } = this.state;
     const { modals, field } = settings;
@@ -45,25 +54,24 @@ class App extends React.Component<{}, IAppState> {
           settings={settings}
         />
 
-        {field && (
-          <Diagram>
-            <Grid {...field.grid} />
-            <InnerContainer>
-              {field.entities.map(entity => (
-                <Entity
-                  pos={new Pos(...entity.pos)}
-                  key={entity.header + entity.pos.join('')}>
-                  <Header>{entity.header}</Header>
-                  <Content>
-                    {entity.content.map(content => (
-                      <ContentItem key={content}>{content}</ContentItem>
-                    ))}
-                  </Content>
-                </Entity>
-              ))}
-            </InnerContainer>
-          </Diagram>
-        )}
+        <Diagram>
+          <Grid {...field.grid} />
+          <InnerContainer>
+            {field.entities.map((entity, index) => (
+              <Entity
+                pos={new Pos(...entity.pos)}
+                onUpdate={this.updateEntity(entity, index)}
+                key={entity.header + entity.pos.join('')}>
+                <Header>{entity.header}</Header>
+                <Content>
+                  {entity.content.map(content => (
+                    <ContentItem key={content}>{content}</ContentItem>
+                  ))}
+                </Content>
+              </Entity>
+            ))}
+          </InnerContainer>
+        </Diagram>
 
         <ExportModal
           visible={modals.export}

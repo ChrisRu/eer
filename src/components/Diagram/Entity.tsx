@@ -5,6 +5,7 @@ import Pos from '../util/Pos';
 interface IEntityProps {
   children?: React.ReactNode;
   pos: Pos;
+  onUpdate?: (entity: any) => void;
 }
 
 interface IEntityState {
@@ -19,7 +20,7 @@ export interface IEntityChild {
 
 class Entity extends React.Component<IEntityProps, IEntityState> {
   render() {
-    const { pos, children } = this.props;
+    const { pos, children, onUpdate } = this.props;
 
     const childComponents: any[] = children
       ? Array.isArray(children)
@@ -30,6 +31,7 @@ class Entity extends React.Component<IEntityProps, IEntityState> {
     return (
       <Group
         pos={pos}
+        onMove={onUpdate}
         movable
         render={({ onMouseDown, minWidth, onUpdateSize }) =>
           childComponents.map((Child: React.ReactElement<any>, index) => (
