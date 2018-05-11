@@ -15,6 +15,24 @@ interface IInnerContainerState {
   createItem: Pos | null;
 }
 
+const newZoom = (currentZoom: number, deltaY: number) => {
+  const zoomScale = 0.05;
+  const minZoom = 0.3;
+  const maxZoom = 2;
+
+  const goingUp = deltaY < 0;
+
+  // Ignore event if going past zoom limits
+  if (
+    (!goingUp && currentZoom < minZoom) ||
+    (goingUp && currentZoom > maxZoom)
+  ) {
+    return currentZoom;
+  }
+
+  return currentZoom + (goingUp ? zoomScale : -zoomScale);
+};
+
 class InnerContainer extends WindowSubComponent<
   IInnerContainerProps,
   IInnerContainerState
@@ -36,6 +54,12 @@ class InnerContainer extends WindowSubComponent<
     return `translate(${x} ${y}) scale(${zoom})`;
   }
 
+  zoom = (event: MouseWheelEvent) => {
+    this.setState(({ zoom }) => ({
+      zoom: newZoom(zoom, event.deltaY)
+    }));
+  };
+
   mouseMove = (event: MouseEvent) => {
     if (this.state.mouseDown) {
       const { movementX, movementY } = event;
@@ -47,20 +71,30 @@ class InnerContainer extends WindowSubComponent<
     }
   };
 
-  mouseDown = () => {
-    this.setState({
-      mouseDown: true
-    });
+  mouseDown = (event: React.MouseEvent<SVGRectElement>) => {
+    if (event.button === 1) {
+      event.preventDefault();
+      this.setState({
+        mouseDown: true
+      });
+    }
   };
 
-  mouseUp = () => {
-    this.setState({
-      mouseDown: false
-    });
+  mouseUp = (event: MouseEvent) => {
+    if (event.button === 1) {
+      event.preventDefault();
+      this.setState({
+        mouseDown: false
+      });
+    }
   };
 
   createItem = (event: React.MouseEvent<any>) => {
-    this.setState({ createItem: new Pos(event.pageX, event.pageY) });
+    const pos = new Pos(event.pageX, event.pageY);
+
+    this.setState(({ createItem }) => ({
+      createItem: createItem ? null : pos
+    }));
   };
 
   exitItem = () => {
@@ -77,9 +111,21 @@ class InnerContainer extends WindowSubComponent<
     });
   };
 
+  keydown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      this.setState({
+        createItem: null,
+        mouseMove: false,
+        mouseDown: false
+      });
+    }
+  };
+
   componentDidMount() {
     this.on('mousemove', this.mouseMove);
     this.on('mouseup', this.mouseUp);
+    this.on('wheel', this.zoom);
+    this.on('keydown', this.keydown);
   }
 
   render() {
