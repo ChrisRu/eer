@@ -75,7 +75,7 @@ class App extends React.Component<{}, IAppState> {
 
         <ExportModal
           visible={modals.export}
-          onClose={this.toggleModal('export')}
+          onClose={this.toggleModal('export', false)}
         />
       </div>
     );
