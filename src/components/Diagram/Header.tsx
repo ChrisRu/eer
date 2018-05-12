@@ -63,7 +63,9 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
           transform="translate(-10 0)"
           width={minWidth}
           height={fontSize + padding.height}
-          onMouseDown={() => (onMouseDown ? onMouseDown(Header) : null)}
+          onMouseDown={event =>
+            onMouseDown ? onMouseDown(Header, event) : null
+          }
           className="diagram__rect diagram__rect--header"
         />
         <text

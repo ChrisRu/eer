@@ -2,55 +2,45 @@
   height: 100vh;
   width: 100vw;
   background-color: $diagram-background;
-
   &__grid {
     &-line {
       stroke: $diagram-grid-color;
     }
   }
-
   &__text {
     font-family: $family-primary;
     font-weight: 400;
-
     &--header {
       font-weight: 500;
     }
   }
-
   &__rect {
     &--header {
       fill: $diagram-block-header;
       transition: $transition-speed $transition-easing fill;
       cursor: -webkit-grab;
       cursor: move;
-
       &:hover {
         fill: $diagram-block-header-hover;
       }
-
       &:active {
         cursor: -webkit-grabbing;
         fill: $diagram-block-header-active;
       }
     }
-
     &--content {
       fill: $diagram-block-item;
       transition: $transition-speed $transition-easing fill;
       cursor: -webkit-grab;
       cursor: move;
-
       &:hover {
         fill: $diagram-block-item-hover;
       }
-
       &:active {
         cursor: -webkit-grabbing;
       }
     }
   }
-
   &__input {
     width: 100%;
     height: 28px;

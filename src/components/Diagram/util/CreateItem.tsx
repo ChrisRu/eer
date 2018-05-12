@@ -12,6 +12,18 @@ class CreateItem extends React.Component<ICreateItemProps> {
     return `translate(${x + 10} ${y - 28})`;
   }
 
+  shouldComponentUpdate({ pos }: ICreateItemProps) {
+    if (pos === this.props.pos) {
+      return false;
+    }
+
+    if (pos && this.props.pos && pos.equals(this.props.pos)) {
+      return false;
+    }
+
+    return true;
+  }
+
   render() {
     const { pos } = this.props;
 

@@ -83,7 +83,9 @@ class ContentItem extends React.Component<
           width={minWidth}
           height={fontSize + padding.height}
           onDoubleClick={this.doubleClick}
-          onMouseDown={onMouseDown}
+          onMouseDown={event =>
+            onMouseDown ? onMouseDown(ContentItem, event) : null
+          }
           className="diagram__rect diagram__rect--content"
         />
         <Text

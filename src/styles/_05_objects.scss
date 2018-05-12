@@ -21,48 +21,39 @@
   font-family: $family-primary;
   padding: 0.5em 1em;
   outline: none;
-
+  text-decoration: none;
   &:hover {
     background-color: $button-default-background-hover;
   }
-
   &:active {
     background-color: $button-default-active-background;
   }
-
   &:focus {
     outline: none;
   }
-
   &--primary {
     background-color: $highlight-color;
     color: #fff;
-
     &:hover {
       background-color: $highlight-color-dimmed;
     }
-
     &:active {
       background-color: $highlight-color-dark;
     }
   }
-
   &--tertiary {
     background-color: transparent;
     color: rgba(0, 0, 0, 0.8);
-
     &:hover {
       color: rgba(0, 0, 0, 1);
       background-color: $color-secondary-background;
     }
-
     &:active {
       color: rgba(0, 0, 0, 1);
       background-color: $color-primary-background;
     }
   }
-
-  &--left ~ &--right {
+  &--left~&--right {
     margin-left: auto;
   }
 }
@@ -91,7 +82,6 @@
   box-sizing: border-box;
   height: 2rem;
   width: 100%;
-
   &:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
@@ -103,13 +93,11 @@
   height: 1em;
   display: inline-block;
   vertical-align: middle;
-
   path,
   polygon,
   rect {
     fill: $icon-color;
   }
-
   circle {
     stroke: $icon-color;
     stroke-width: 1;

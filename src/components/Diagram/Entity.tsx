@@ -15,7 +15,7 @@ interface IEntityState {
 export interface IEntityChild {
   minWidth?: number;
   onUpdateSize?: (width: number) => void;
-  onMouseDown?: (type: any) => void;
+  onMouseDown?: (type: any, event: React.MouseEvent<any>) => void;
 }
 
 class Entity extends React.Component<IEntityProps, IEntityState> {

@@ -13,14 +13,18 @@ interface IGroupProps {
 
 interface IGroupState {
   mouseDown: boolean;
+  movingPos: Pos;
   transform: Pos;
   posUpdate: boolean;
 }
+
+let startMovingPos: Pos | null = null;
 
 class Group extends WindowSubComponent<IGroupProps, IGroupState> {
   state = {
     mouseDown: false,
     transform: new Pos(),
+    movingPos: new Pos(),
     posUpdate: false
   };
 
@@ -37,20 +41,19 @@ class Group extends WindowSubComponent<IGroupProps, IGroupState> {
     };
   }
 
-  mouseMove = (event: MouseEvent) => {
+  mouseMove = ({ pageX, pageY }: MouseEvent) => {
     if (this.state.mouseDown) {
-      const { movementX, movementY } = event;
+      const xDiff = startMovingPos ? pageX - startMovingPos.x : 0;
+      const yDiff = startMovingPos ? pageY - startMovingPos.y : 0;
 
-      if (movementX !== 0 || movementY !== 0) {
-        this.setState(({ transform }) => ({
-          transform: transform.add(new Pos(movementX, movementY)),
-          posUpdate: true
-        }));
-      }
+      this.setState({
+        movingPos: new Pos(xDiff, yDiff),
+        posUpdate: true
+      });
     }
   };
 
-  mouseDown = (type: any) => {
+  mouseDown = (type: any, event: React.MouseEvent<any>) => {
     if (this.props.movable === false) {
       return;
     }
@@ -60,6 +63,8 @@ class Group extends WindowSubComponent<IGroupProps, IGroupState> {
         mouseDown: true,
         posUpdate: true
       });
+
+      startMovingPos = new Pos(event.pageX, event.pageY);
     }
   };
 
@@ -67,10 +72,12 @@ class Group extends WindowSubComponent<IGroupProps, IGroupState> {
     const { onMove } = this.props;
 
     this.setState(
-      {
+      ({ transform, movingPos }) => ({
         mouseDown: false,
+        transform: transform.add(movingPos),
+        movingPos: new Pos(),
         posUpdate: true
-      },
+      }),
       () => {
         if (onMove) {
           const { x, y } = this.state.transform;
@@ -78,10 +85,13 @@ class Group extends WindowSubComponent<IGroupProps, IGroupState> {
         }
       }
     );
+
+    startMovingPos = null;
   };
 
   get transform() {
-    const { x, y } = this.state.transform;
+    const { transform, movingPos } = this.state;
+    const { x, y } = transform.add(movingPos);
     return `translate(${x} ${y})`;
   }
 

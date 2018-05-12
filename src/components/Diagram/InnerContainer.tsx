@@ -3,19 +3,7 @@ import WindowSubComponent from '../util/sub/WindowSubComponent';
 import Pos from '../util/Pos';
 import CreateItem from './util/CreateItem';
 
-interface IInnerContainerProps {
-  children?: React.ReactNode;
-}
-
-interface IInnerContainerState {
-  mouseDown: boolean;
-  mouseMove: boolean;
-  pos: Pos;
-  zoom: number;
-  createItem: Pos | null;
-}
-
-const newZoom = (currentZoom: number, deltaY: number) => {
+const calculateZoom = (currentZoom: number, deltaY: number) => {
   const zoomScale = 0.05;
   const minZoom = 0.3;
   const maxZoom = 2;
@@ -33,6 +21,21 @@ const newZoom = (currentZoom: number, deltaY: number) => {
   return currentZoom + (goingUp ? zoomScale : -zoomScale);
 };
 
+interface IInnerContainerProps {
+  children?: React.ReactNode;
+}
+
+interface IInnerContainerState {
+  mouseDown: boolean;
+  mouseMove: boolean;
+  movingPos: Pos;
+  pos: Pos;
+  zoom: number;
+  createItem: Pos | null;
+}
+
+let startMovingPos: Pos | null = null;
+
 class InnerContainer extends WindowSubComponent<
   IInnerContainerProps,
   IInnerContainerState
@@ -40,33 +43,34 @@ class InnerContainer extends WindowSubComponent<
   state = {
     mouseDown: false,
     mouseMove: false,
+    movingPos: new Pos(),
     pos: new Pos(),
     zoom: 1,
     createItem: null
   };
 
-  get transform(): string {
-    const {
-      zoom,
-      pos: { x, y }
-    } = this.state;
-
-    return `translate(${x} ${y}) scale(${zoom})`;
-  }
-
   zoom = (event: MouseWheelEvent) => {
-    this.setState(({ zoom }) => ({
-      zoom: newZoom(zoom, event.deltaY)
-    }));
+    this.setState(({ zoom, pos }) => {
+      const newZoom = calculateZoom(zoom, event.deltaY);
+      const zoomDiff = zoom - newZoom;
+
+      const newPos = new Pos(
+        pos.x + event.pageX - (event.pageX - event.pageX * zoomDiff),
+        pos.y + event.pageY - (event.pageX - event.pageY * zoomDiff)
+      );
+
+      return { zoom: newZoom, pos: newPos };
+    });
   };
 
-  mouseMove = (event: MouseEvent) => {
+  mouseMove = ({ pageX, pageY }: MouseEvent) => {
     if (this.state.mouseDown) {
-      const { movementX, movementY } = event;
+      const xDiff = startMovingPos ? pageX - startMovingPos.x : 0;
+      const yDiff = startMovingPos ? pageY - startMovingPos.y : 0;
 
       this.setState(prevState => ({
         mouseMove: true,
-        pos: new Pos(prevState.pos.x + movementX, prevState.pos.y + movementY)
+        movingPos: new Pos(xDiff, yDiff)
       }));
     }
   };
@@ -77,20 +81,27 @@ class InnerContainer extends WindowSubComponent<
       this.setState({
         mouseDown: true
       });
+
+      startMovingPos = new Pos(event.pageX, event.pageY);
     }
   };
 
   mouseUp = (event: MouseEvent) => {
     if (event.button === 1) {
       event.preventDefault();
-      this.setState({
-        mouseDown: false
-      });
+
+      this.setState(({ movingPos, pos }) => ({
+        mouseDown: false,
+        movingPos: new Pos(),
+        pos: pos.add(movingPos)
+      }));
+
+      startMovingPos = null;
     }
   };
 
-  createItem = (event: React.MouseEvent<any>) => {
-    const pos = new Pos(event.pageX, event.pageY);
+  createItem = ({ pageX, pageY }: React.MouseEvent<any>) => {
+    const pos = new Pos(pageX, pageY);
 
     this.setState(({ createItem }) => ({
       createItem: createItem ? null : pos
@@ -120,6 +131,14 @@ class InnerContainer extends WindowSubComponent<
       });
     }
   };
+
+  get transform(): string {
+    const { zoom, pos, movingPos } = this.state;
+
+    const { x, y } = pos.add(movingPos);
+
+    return `translate(${x} ${y}) scale(${zoom})`;
+  }
 
   componentDidMount() {
     this.on('mousemove', this.mouseMove);

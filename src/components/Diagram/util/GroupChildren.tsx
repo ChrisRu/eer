@@ -9,7 +9,7 @@ export type render = (
 export interface IGroupChildrenProps {
   noUpdate: boolean;
   render: render;
-  onMouseDown: (type: any) => void;
+  onMouseDown: (type: any, event: React.MouseEvent<any>) => void;
 }
 
 interface IGroupChildrenState {
