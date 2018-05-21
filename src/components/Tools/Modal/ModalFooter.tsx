@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as cx from 'classnames';
 
-interface IModalFooterProps {
+interface IProps {
   actions?: IAction[];
 }
 
@@ -14,7 +14,7 @@ interface IAction {
   props?: object;
 }
 
-const ModalFooter = ({ actions }: IModalFooterProps) =>
+const ModalFooter = ({ actions }: IProps) =>
   actions ? (
     <div className="modal__footer">
       {actions.sort(a => +(a.align === 'right')).map(

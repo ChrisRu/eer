@@ -4,24 +4,20 @@ import NavigationItem from './NavigationItem';
 import NavigationList from './NavigationList';
 import NavigationItemToggle from './NavigationItemToggle';
 
-interface INavigationProps {
+interface IProps {
   onUpdateSettings: (settings: Settings) => void;
   settings: Settings;
-  onToggleModal: (modalName: string) => () => void;
+  onToggleModal: (modalName: string, open?: boolean) => () => void;
 }
 
-const Navigation = ({
-  onUpdateSettings,
-  settings,
-  onToggleModal
-}: INavigationProps) => (
+const Navigation = ({ onUpdateSettings, settings, onToggleModal }: IProps) => (
   <NavigationList>
     <NavigationItem
       subList={
         <React.Fragment>
           <NavigationItem>Open</NavigationItem>
           <NavigationItem>Save</NavigationItem>
-          <NavigationItem onClick={onToggleModal('export')}>
+          <NavigationItem onClick={onToggleModal('export', true)}>
             Export
           </NavigationItem>
         </React.Fragment>
@@ -31,8 +27,20 @@ const Navigation = ({
     <NavigationItem
       subList={
         <React.Fragment>
-          <NavigationItem>Increase Size</NavigationItem>
-          <NavigationItem>Decrease Size</NavigationItem>
+          <NavigationItemToggle
+            settings={settings}
+            settingPath="field.grid.size"
+            update={(value: number) => value + 0.3}
+            onUpdate={onUpdateSettings}>
+            Increase Size
+          </NavigationItemToggle>
+          <NavigationItemToggle
+            settings={settings}
+            settingPath="field.grid.size"
+            update={(value: number) => value - 0.3}
+            onUpdate={onUpdateSettings}>
+            Decrease Size
+          </NavigationItemToggle>
         </React.Fragment>
       }>
       Edit
@@ -42,6 +50,7 @@ const Navigation = ({
         <NavigationItemToggle
           settings={settings}
           settingPath="field.grid.visible"
+          update={(value: boolean) => !value}
           onUpdate={onUpdateSettings}>
           Toggle Grid
         </NavigationItemToggle>

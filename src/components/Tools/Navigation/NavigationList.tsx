@@ -1,9 +1,11 @@
 import * as React from 'react';
 
-const NavigationList = ({
-  children
-}: {
+interface IProps {
   children: React.ReactNode | React.ReactNode[];
-}) => <ul className="navigation">{children}</ul>;
+}
+
+const NavigationList = ({ children }: IProps) => (
+  <ul className="navigation">{children}</ul>
+);
 
 export default NavigationList;

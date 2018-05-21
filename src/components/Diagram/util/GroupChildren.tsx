@@ -6,22 +6,19 @@ export type render = (
   props: IEntityChild
 ) => Array<React.ReactElement<Content | Header>>;
 
-export interface IGroupChildrenProps {
+export interface IProps {
   noUpdate: boolean;
   render: render;
   onMouseDown: (type: any, event: React.MouseEvent<any>) => void;
 }
 
-interface IGroupChildrenState {
+interface IState {
   minWidth: number;
 }
 
 let tempWidth = 0;
 
-class GroupChildren extends React.Component<
-  IGroupChildrenProps,
-  IGroupChildrenState
-> {
+class GroupChildren extends React.Component<IProps, IState> {
   state = {
     minWidth: 0
   };
@@ -33,10 +30,7 @@ class GroupChildren extends React.Component<
     }
   };
 
-  shouldComponentUpdate(
-    nextProps: IGroupChildrenProps,
-    nextState: IGroupChildrenState
-  ) {
+  shouldComponentUpdate(nextProps: IProps, nextState: IState) {
     if (nextState.minWidth !== this.state.minWidth) {
       return true;
     }

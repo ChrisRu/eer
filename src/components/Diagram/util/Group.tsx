@@ -4,14 +4,14 @@ import WindowSubComponent from '../../util/sub/WindowSubComponent';
 import GroupChildren, { render } from './GroupChildren';
 import { Header } from '..';
 
-interface IGroupProps {
+interface IProps {
   movable?: boolean;
   pos: Pos;
   render: render;
   onMove?: (entity: any) => void;
 }
 
-interface IGroupState {
+interface IState {
   mouseDown: boolean;
   movingPos: Pos;
   transform: Pos;
@@ -20,7 +20,7 @@ interface IGroupState {
 
 let startMovingPos: Pos | null = null;
 
-class Group extends WindowSubComponent<IGroupProps, IGroupState> {
+class Group extends WindowSubComponent<IProps, IState> {
   state = {
     mouseDown: false,
     transform: new Pos(),
@@ -28,10 +28,7 @@ class Group extends WindowSubComponent<IGroupProps, IGroupState> {
     posUpdate: false
   };
 
-  static getDerivedStateFromProps(
-    nextProps: IGroupProps,
-    nextState: IGroupState
-  ) {
+  static getDerivedStateFromProps(nextProps: IProps, nextState: IState) {
     const { x, y } = nextState.transform.initialized
       ? nextState.transform
       : nextProps.pos || new Pos();

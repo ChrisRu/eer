@@ -2,29 +2,26 @@ import * as React from 'react';
 import Pos from '../util/Pos';
 import { IEntityChild } from './Entity';
 
-interface IHeaderProps extends IEntityChild {
+interface IProps extends IEntityChild {
   children?: React.ReactNode;
   pos?: Pos;
 }
 
-interface IHeaderState {
+interface IState {
   pos: Pos;
 }
 
 const padding = { width: 40, height: 10 };
 const fontSize = 18;
 
-class Header extends React.Component<IHeaderProps, IHeaderState> {
+class Header extends React.Component<IProps, IState> {
   private element: SVGTextElement | null;
 
   state = {
     pos: new Pos()
   };
 
-  static getDerivedStateFromProps(
-    nextProps: IHeaderProps,
-    nextState: IHeaderState
-  ) {
+  static getDerivedStateFromProps(nextProps: IProps, nextState: IState) {
     const { x, y } = nextProps.pos || new Pos();
     return {
       ...nextState,

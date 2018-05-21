@@ -3,13 +3,13 @@ import Text from './util/Text';
 import { IEntityChild } from './Entity';
 import Pos from '../util/Pos';
 
-interface IContentItemProps extends IEntityChild {
+interface IProps extends IEntityChild {
   children: string;
   pos?: Pos;
   onMouseMove?: (event: MouseEvent) => void;
 }
 
-interface IContentItemState {
+interface IState {
   editing: boolean;
   pos: Pos;
   value: string | undefined;
@@ -18,10 +18,7 @@ interface IContentItemState {
 const padding = { width: 40, height: 10 };
 const fontSize = 18;
 
-class ContentItem extends React.Component<
-  IContentItemProps,
-  IContentItemState
-> {
+class ContentItem extends React.Component<IProps, IState> {
   private element: SVGTextElement | HTMLInputElement | null;
 
   state = {
@@ -30,10 +27,7 @@ class ContentItem extends React.Component<
     value: undefined
   };
 
-  static getDerivedStateFromProps(
-    nextProps: IContentItemProps,
-    nextState: IContentItemState
-  ) {
+  static getDerivedStateFromProps(nextProps: IProps, nextState: IState) {
     return {
       ...nextState,
       pos: nextProps.pos

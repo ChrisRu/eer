@@ -9,10 +9,8 @@
     "ramda": "^0.25.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-redux": "^5.0.7",
     "react-scripts-ts": "^2.15.1",
-    "react-transition-group": "^2.3.1",
-    "redux": "^4.0.0"
+    "react-transition-group": "^2.3.1"
   },
   "scripts": {
     "lint": "tslint --project ./",
@@ -32,9 +30,7 @@
     "@types/ramda": "^0.25.24",
     "@types/react": "^16.3.13",
     "@types/react-dom": "^16.0.5",
-    "@types/react-redux": "^5.0.19",
     "@types/react-transition-group": "^2.0.9",
-    "@types/redux": "^3.6.0",
     "@types/why-did-you-update": "^0.0.8",
     "node-sass": "^4.9.0",
     "node-sass-chokidar": "^1.2.2",

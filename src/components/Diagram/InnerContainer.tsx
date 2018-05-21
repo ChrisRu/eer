@@ -21,11 +21,11 @@ const calculateZoom = (currentZoom: number, deltaY: number) => {
   return currentZoom + (goingUp ? zoomScale : -zoomScale);
 };
 
-interface IInnerContainerProps {
+interface IProps {
   children?: React.ReactNode;
 }
 
-interface IInnerContainerState {
+interface IState {
   mouseDown: boolean;
   mouseMove: boolean;
   movingPos: Pos;
@@ -36,10 +36,7 @@ interface IInnerContainerState {
 
 let startMovingPos: Pos | null = null;
 
-class InnerContainer extends WindowSubComponent<
-  IInnerContainerProps,
-  IInnerContainerState
-> {
+class InnerContainer extends WindowSubComponent<IProps, IState> {
   state = {
     mouseDown: false,
     mouseMove: false,

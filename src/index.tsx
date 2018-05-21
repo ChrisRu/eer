@@ -6,9 +6,3 @@ import './styles/main.css';
 
 ReactDOM.render(<App />, document.getElementById('root') as HTMLElement);
 registerServiceWorker();
-
-if (process.env.NODE_ENV !== 'production') {
-  import('why-did-you-update').then(({ whyDidYouUpdate }) => {
-    whyDidYouUpdate(React);
-  });
-}

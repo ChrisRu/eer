@@ -3,7 +3,7 @@ import { ContentItem } from '.';
 import { IEntityChild } from './Entity';
 import Pos from '../util/Pos';
 
-interface IContentProps extends IEntityChild {
+interface IProps extends IEntityChild {
   children:
     | Array<React.ReactElement<ContentItem>>
     | React.ReactElement<ContentItem>;
@@ -11,7 +11,7 @@ interface IContentProps extends IEntityChild {
   y?: number;
 }
 
-class Content extends React.Component<IContentProps> {
+class Content extends React.Component<IProps> {
   get transform(): string {
     const { x = 0, y = 0 } = this.props;
 

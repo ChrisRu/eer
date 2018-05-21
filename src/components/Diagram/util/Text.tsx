@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface ITextProps {
+interface IProps {
   onChange: (value: string) => void;
   onCancel: () => void;
   value?: string;
@@ -8,19 +8,16 @@ interface ITextProps {
   [x: string]: any;
 }
 
-interface ITextState {
+interface IState {
   value: string;
 }
 
-class Text extends React.Component<ITextProps, ITextState> {
+class Text extends React.Component<IProps, IState> {
   state = {
     value: ''
   };
 
-  static getDerivedStateFromProps(
-    nextProps: ITextProps,
-    nextState: ITextState
-  ) {
+  static getDerivedStateFromProps(nextProps: IProps, nextState: IState) {
     return {
       ...nextState,
       value: nextProps.value || ''

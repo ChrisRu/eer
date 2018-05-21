@@ -1,14 +1,25 @@
 import * as React from 'react';
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../Modal';
 
-interface IExportModalProps {
+interface IProps {
   onClose: () => void;
   visible: boolean;
 }
 
-const ExportModal = ({ visible, onClose }: IExportModalProps) => {
+const ExportModal = ({ visible, onClose }: IProps) => {
   const linkType = 'data:image/svg+xml;charset=utf-8';
-  const content = encodeURIComponent('<svg><text x="0" y="0">hey</text</svg>');
+  const diagram = document.getElementById('svg_diagram');
+
+  if (!diagram) {
+    return (
+      <Modal visible={visible} onClose={onClose}>
+        <ModalHeader onClose={onClose}>Export Diagram</ModalHeader>
+        <ModalBody>Can't export at the moment</ModalBody>
+      </Modal>
+    );
+  }
+
+  const content = encodeURIComponent(diagram.outerHTML);
   const uri = `${linkType},${content}`;
 
   return (
@@ -63,7 +74,7 @@ const ExportModal = ({ visible, onClose }: IExportModalProps) => {
             element: 'a',
             props: {
               href: uri,
-              download: 'code.txt'
+              download: 'diagram.svg'
             },
             name: 'Export'
           }

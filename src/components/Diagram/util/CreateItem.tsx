@@ -1,18 +1,18 @@
 import * as React from 'react';
 import Pos from '../../util/Pos';
 
-interface ICreateItemProps {
+interface IProps {
   onExit: () => void;
   pos: Pos | null;
 }
 
-class CreateItem extends React.Component<ICreateItemProps> {
+class CreateItem extends React.Component<IProps> {
   get transform() {
     const { x, y } = this.props.pos || new Pos();
     return `translate(${x + 10} ${y - 28})`;
   }
 
-  shouldComponentUpdate({ pos }: ICreateItemProps) {
+  shouldComponentUpdate({ pos }: IProps) {
     if (pos === this.props.pos) {
       return false;
     }

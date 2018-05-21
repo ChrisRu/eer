@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 import * as cx from 'classnames';
 import WindowSubComponent from '../../util/sub/WindowSubComponent';
 
-interface IModalProps {
+interface IProps {
   visible: boolean;
   onClose: () => void;
   defaultStyle?: object;
@@ -11,7 +11,7 @@ interface IModalProps {
   transitionStyles?: object;
 }
 
-class Modal extends WindowSubComponent<IModalProps> {
+class Modal extends WindowSubComponent<IProps> {
   keydown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       this.props.onClose();

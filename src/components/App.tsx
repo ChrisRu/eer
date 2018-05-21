@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { assocPath, path, clone, mergeDeepLeft } from 'ramda';
+import { clone, assocPath, path } from 'ramda';
 import Pos from './util/Pos';
-import Settings, { IEntity } from './Settings';
+import Settings from './Settings';
 import Navigation from './Tools/Navigation/Navigation';
+import ExportModal from './Tools/Modal/Modals/ExportModal';
 import Diagram, {
   Grid,
   InnerContainer,
@@ -11,47 +12,42 @@ import Diagram, {
   Content,
   ContentItem
 } from './Diagram';
-import ExportModal from './Tools/Modal/Modals/ExportModal';
 
-interface IAppState {
+interface IState {
   settings: Settings;
 }
 
-class App extends React.Component<{}, IAppState> {
+class App extends React.Component<{}, IState> {
   state = {
     settings: new Settings()
   };
 
   updateSettings = (settings: Settings) => this.setState({ settings });
 
-  toggleModal = (modalName: string, open?: boolean) => () => {
-    const { settings } = this.state;
-    const settingPath = ['modals', modalName];
-
-    const newValue = open === undefined ? !path(settingPath, settings) : open;
-
-    this.updateSettings(assocPath(settingPath, newValue, clone(settings)));
-  };
-
-  updateEntity = (entity: IEntity, index: number) => (newEntity: IEntity) => {
-    const { settings } = this.state;
-    const settingPath = ['field', 'entities', index];
-
-    this.updateSettings(
-      assocPath(settingPath, mergeDeepLeft(entity, newEntity), clone(settings))
+  toggleModal = (name: string, open?: boolean) => () => {
+    this.setState(prevState =>
+      assocPath(
+        ['settings', 'modals', name],
+        open !== undefined
+          ? open
+          : !path(['settings', 'modals', name], prevState),
+        clone(prevState)
+      )
     );
   };
 
   render() {
     const { settings } = this.state;
-    const { modals, field } = settings;
+    const { field, modals } = settings;
+
+    console.log(field);
 
     return (
       <div className="app">
         <Navigation
+          settings={settings}
           onUpdateSettings={this.updateSettings}
           onToggleModal={this.toggleModal}
-          settings={settings}
         />
 
         <Diagram>
@@ -60,7 +56,6 @@ class App extends React.Component<{}, IAppState> {
             {field.entities.map((entity, index) => (
               <Entity
                 pos={new Pos(...entity.pos)}
-                onUpdate={this.updateEntity(entity, index)}
                 key={entity.header + entity.pos.join('')}>
                 <Header>{entity.header}</Header>
                 <Content>
@@ -81,4 +76,5 @@ class App extends React.Component<{}, IAppState> {
     );
   }
 }
+
 export default App;

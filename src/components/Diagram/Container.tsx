@@ -1,18 +1,18 @@
 import * as React from 'react';
 import WindowSubComponent from '../util/sub/WindowSubComponent';
 
-interface IViewProps {
+interface IProps {
   children?: React.ReactNode;
 }
 
-interface IViewState {
+interface IState {
   size: {
     height: number;
     width: number;
   };
 }
 
-class View extends WindowSubComponent<IViewProps, IViewState> {
+class View extends WindowSubComponent<IProps, IState> {
   state = {
     size: {
       height: 0,
@@ -38,7 +38,11 @@ class View extends WindowSubComponent<IViewProps, IViewState> {
     const { children } = this.props;
 
     return (
-      <svg className="diagram" xmlns="http://www.w3.org/2000/svg" {...size}>
+      <svg
+        id="svg_diagram"
+        className="diagram"
+        xmlns="http://www.w3.org/2000/svg"
+        {...size}>
         <defs>
           <filter id="box-shadow" x="-10%" y="-10%" width="120%" height="120%">
             <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" />

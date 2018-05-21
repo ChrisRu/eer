@@ -29,6 +29,7 @@
     "jsx-boolean-value": false,
     "label-position": true,
     "max-line-length": [true, 120],
+    "max-classes-per-file": [false],
     "member-access": false,
     "member-ordering": [
       false,

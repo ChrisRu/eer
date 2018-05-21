@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-interface IGridProps {
+interface IProps {
   size?: number;
   spacing?: number;
   color?: string;
   visible?: boolean;
 }
 
-class Grid extends React.Component<IGridProps> {
+class Grid extends React.Component<IProps> {
   render() {
     const { size = 30, spacing = 8, visible = true } = this.props;
 

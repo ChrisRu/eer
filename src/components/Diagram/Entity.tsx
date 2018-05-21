@@ -2,13 +2,13 @@ import * as React from 'react';
 import Group from './util/Group';
 import Pos from '../util/Pos';
 
-interface IEntityProps {
+interface IProps {
   children?: React.ReactNode;
   pos: Pos;
   onUpdate?: (entity: any) => void;
 }
 
-interface IEntityState {
+interface IState {
   minWidth: number;
 }
 
@@ -18,7 +18,7 @@ export interface IEntityChild {
   onMouseDown?: (type: any, event: React.MouseEvent<any>) => void;
 }
 
-class Entity extends React.Component<IEntityProps, IEntityState> {
+class Entity extends React.Component<IProps, IState> {
   render() {
     const { pos, children, onUpdate } = this.props;
 
