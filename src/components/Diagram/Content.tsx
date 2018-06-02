@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ContentItem } from '.';
 import { IEntityChild } from './Entity';
 import Pos from '../util/Pos';
+import { IEntity } from '../Settings';
 
 interface IProps extends IEntityChild {
   children:
@@ -9,12 +10,12 @@ interface IProps extends IEntityChild {
     | React.ReactElement<ContentItem>;
   x?: number;
   y?: number;
+  onUpdate?: (entity: IEntity) => void;
 }
 
 class Content extends React.Component<IProps> {
   get transform(): string {
     const { x = 0, y = 0 } = this.props;
-
     return `translate(${x} ${y})`;
   }
 

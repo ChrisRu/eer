@@ -8,20 +8,10 @@ interface IProps {
 
 class CreateItem extends React.Component<IProps> {
   get transform() {
+    const height = 28;
+    const padding = 10;
     const { x, y } = this.props.pos || new Pos();
-    return `translate(${x + 10} ${y - 28})`;
-  }
-
-  shouldComponentUpdate({ pos }: IProps) {
-    if (pos === this.props.pos) {
-      return false;
-    }
-
-    if (pos && this.props.pos && pos.equals(this.props.pos)) {
-      return false;
-    }
-
-    return true;
+    return `translate(${x + padding} ${y - height})`;
   }
 
   render() {

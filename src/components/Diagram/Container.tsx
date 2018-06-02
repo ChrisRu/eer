@@ -2,30 +2,24 @@ import * as React from 'react';
 import WindowSubComponent from '../util/sub/WindowSubComponent';
 
 interface IProps {
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 interface IState {
-  size: {
-    height: number;
-    width: number;
-  };
+  height: number;
+  width: number;
 }
 
 class View extends WindowSubComponent<IProps, IState> {
   state = {
-    size: {
-      height: 0,
-      width: 0
-    }
+    height: 0,
+    width: 0
   };
 
   updateSize = () => {
     this.setState({
-      size: {
-        height: window.innerHeight,
-        width: window.innerWidth
-      }
+      height: window.innerHeight,
+      width: window.innerWidth
     });
   };
 
@@ -34,7 +28,7 @@ class View extends WindowSubComponent<IProps, IState> {
   }
 
   render() {
-    const { size } = this.state;
+    const { height, width } = this.state;
     const { children } = this.props;
 
     return (
@@ -42,7 +36,8 @@ class View extends WindowSubComponent<IProps, IState> {
         id="svg_diagram"
         className="diagram"
         xmlns="http://www.w3.org/2000/svg"
-        {...size}>
+        height={height}
+        width={width}>
         <defs>
           <filter id="box-shadow" x="-10%" y="-10%" width="120%" height="120%">
             <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" />

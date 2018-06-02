@@ -30,14 +30,6 @@ class GroupChildren extends React.Component<IProps, IState> {
     }
   };
 
-  shouldComponentUpdate(nextProps: IProps, nextState: IState) {
-    if (nextState.minWidth !== this.state.minWidth) {
-      return true;
-    }
-
-    return false;
-  }
-
   render() {
     const { onMouseDown } = this.props;
     const { minWidth } = this.state;

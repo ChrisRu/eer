@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { clone, assocPath, path } from 'ramda';
+import { clone, assocPath, path, merge } from 'ramda';
 import Pos from './util/Pos';
-import Settings from './Settings';
+import Settings, { IEntity } from './Settings';
 import Navigation from './Tools/Navigation/Navigation';
 import ExportModal from './Tools/Modal/Modals/ExportModal';
 import Diagram, {
@@ -18,11 +18,33 @@ interface IState {
 }
 
 class App extends React.Component<{}, IState> {
+  private localStorage = 'settings';
+
   state = {
     settings: new Settings()
   };
 
-  updateSettings = (settings: Settings) => this.setState({ settings });
+  componentDidMount() {
+    this.getSettingsFromStorage();
+  }
+
+  setSettingsInStorage = (settings: Settings) => {
+    const storedSettings = JSON.stringify(settings);
+    window.localStorage.setItem(this.localStorage, storedSettings);
+  };
+
+  getSettingsFromStorage = () => {
+    const storedSettings = window.localStorage.getItem(this.localStorage);
+    if (storedSettings) {
+      this.setState({
+        settings: JSON.parse(storedSettings)
+      });
+    }
+  };
+
+  updateSettings = (settings: Settings) => {
+    this.setState({ settings });
+  };
 
   toggleModal = (name: string, open?: boolean) => () => {
     this.setState(prevState =>
@@ -36,11 +58,20 @@ class App extends React.Component<{}, IState> {
     );
   };
 
+  updateEntity = (index: number) => (entity: IEntity) => {
+    const entityPath = ['settings', 'field', 'entities', index];
+    this.setState(prevState =>
+      assocPath(
+        entityPath,
+        merge(path(entityPath, prevState), entity),
+        prevState
+      )
+    );
+  };
+
   render() {
     const { settings } = this.state;
     const { field, modals } = settings;
-
-    console.log(field);
 
     return (
       <div className="app">
@@ -55,10 +86,11 @@ class App extends React.Component<{}, IState> {
           <InnerContainer>
             {field.entities.map((entity, index) => (
               <Entity
+                onUpdate={this.updateEntity(index)}
                 pos={new Pos(...entity.pos)}
                 key={entity.header + entity.pos.join('')}>
                 <Header>{entity.header}</Header>
-                <Content>
+                <Content onUpdate={this.updateEntity(index)}>
                   {entity.content.map(content => (
                     <ContentItem key={content}>{content}</ContentItem>
                   ))}

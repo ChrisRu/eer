@@ -69,6 +69,11 @@
   box-sizing: border-box;
   height: 2rem;
   width: 100%;
+  outline: none;
+  &:focus {
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+  }
 }
 
 .select {
@@ -82,10 +87,40 @@
   box-sizing: border-box;
   height: 2rem;
   width: 100%;
+  outline: none;
+  &:focus {
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+  }
   &:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
   }
+  &:-moz-focusring * {
+    color: #000;
+    text-shadow: none;
+  }
+}
+
+.range {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  height: 2em;
+  width: calc(100% - 2.6em);
+  &::-moz-focus-outer {
+    border: 0;
+  }
+}
+
+.range-value {
+  margin: 0;
+  margin-left: 0.5em;
+  float: right;
+  display: block;
+  height: 2em;
+  line-height: 2em;
 }
 
 .icon {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { assocPath, clone, path } from 'ramda';
 import NavigationItem from './NavigationItem';
 import Settings from '../../Settings';
-import { CheckIcon, UncheckIcon } from '../../util/icons';
+import Icon from '../../util/Icon';
 
 interface IProps {
   onUpdate: (settings: Settings) => void;
@@ -30,9 +30,9 @@ const NavigationItemToggle = ({
       }>
       {showToggle &&
         (value ? (
-          <CheckIcon className="navigation__button-toggle" />
+          <Icon name="check-circle" className="navigation__button-toggle" />
         ) : (
-          <UncheckIcon className="navigation__button-toggle" />
+          <Icon name="circle" className="navigation__button-toggle" />
         ))}
       {children}
     </NavigationItem>

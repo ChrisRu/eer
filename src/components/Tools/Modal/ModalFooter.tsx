@@ -8,7 +8,7 @@ interface IProps {
 interface IAction {
   align: string;
   onClick?: () => void;
-  name: string;
+  name: React.ReactNode;
   type: string;
   element?: 'button' | 'a';
   props?: object;
@@ -26,7 +26,7 @@ const ModalFooter = ({ actions }: IProps) =>
                 `button--${props.type}`,
                 `button--${props.align}`
               )}
-              key={props.name}
+              key={props.type}
               onClick={props.onClick}
               {...props.props}>
               {props.name}
@@ -38,7 +38,7 @@ const ModalFooter = ({ actions }: IProps) =>
                 `button--${props.type}`,
                 `button--${props.align}`
               )}
-              key={props.name}
+              key={props.type}
               {...props.props}>
               {props.name}
             </a>

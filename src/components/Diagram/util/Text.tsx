@@ -3,7 +3,7 @@ import * as React from 'react';
 interface IProps {
   onChange: (value: string) => void;
   onCancel: () => void;
-  value?: string;
+  value: string;
   createRef?: (element: SVGTextElement | HTMLInputElement | null) => void;
   [x: string]: any;
 }
@@ -48,8 +48,10 @@ class Text extends React.Component<IProps, IState> {
       ...props
     } = this.props;
 
+    const padding = 10;
+
     return editing ? (
-      <foreignObject x={-10} y={y + 1} width={width} height={height}>
+      <foreignObject x={-padding} y={y + 1} width={width} height={height}>
         <input
           ref={createRef}
           type="text"

@@ -66,22 +66,16 @@ class Group extends WindowSubComponent<IProps, IState> {
   };
 
   mouseUp = () => {
+    if (this.state.movingPos.initialized === false) {
+      return;
+    }
+
     const { onMove } = this.props;
 
-    this.setState(
-      ({ transform, movingPos }) => ({
-        mouseDown: false,
-        transform: transform.add(movingPos),
-        movingPos: new Pos(),
-        posUpdate: true
-      }),
-      () => {
-        if (onMove) {
-          const { x, y } = this.state.transform;
-          onMove({ pos: [x, y] });
-        }
-      }
-    );
+    if (onMove) {
+      const { x, y } = this.state.transform.add(this.state.movingPos);
+      onMove({ pos: [x, y] });
+    }
 
     startMovingPos = null;
   };

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CrossIcon } from '../../util/icons';
+import Icon from '../../util/Icon';
 
 interface IProps {
   children?: React.ReactNode;
@@ -11,7 +11,7 @@ const ModalHeader = ({ children, onClose }: IProps) => (
     <h2 className="modal__header-title">{children}</h2>
     {onClose ? (
       <div className="modal__header-close">
-        <CrossIcon onClick={onClose} />
+        <Icon name="cross" onClick={onClose} />
       </div>
     ) : null}
   </div>

@@ -3,6 +3,7 @@ import Settings from '../../Settings';
 import NavigationItem from './NavigationItem';
 import NavigationList from './NavigationList';
 import NavigationItemToggle from './NavigationItemToggle';
+import Icon from '../../util/Icon';
 
 interface IProps {
   onUpdateSettings: (settings: Settings) => void;
@@ -15,10 +16,14 @@ const Navigation = ({ onUpdateSettings, settings, onToggleModal }: IProps) => (
     <NavigationItem
       subList={
         <React.Fragment>
-          <NavigationItem>Open</NavigationItem>
-          <NavigationItem>Save</NavigationItem>
+          <NavigationItem>
+            <Icon name="file" title="Open File" /> Open
+          </NavigationItem>
+          <NavigationItem>
+            <Icon name="save" title="Save File" /> Save
+          </NavigationItem>
           <NavigationItem onClick={onToggleModal('export', true)}>
-            Export
+            <Icon name="download" title="Export File" /> Export
           </NavigationItem>
         </React.Fragment>
       }>
@@ -32,14 +37,14 @@ const Navigation = ({ onUpdateSettings, settings, onToggleModal }: IProps) => (
             settingPath="field.grid.size"
             update={(value: number) => value + 0.3}
             onUpdate={onUpdateSettings}>
-            Increase Size
+            <Icon name="zoom-in" title="Zoom In" /> Increase Size
           </NavigationItemToggle>
           <NavigationItemToggle
             settings={settings}
             settingPath="field.grid.size"
             update={(value: number) => value - 0.3}
             onUpdate={onUpdateSettings}>
-            Decrease Size
+            <Icon name="zoom-out" title="Zoom Out" /> Decrease Size
           </NavigationItemToggle>
         </React.Fragment>
       }>
