@@ -16,16 +16,16 @@ interface IState {
   minWidth: number;
 }
 
-let tempWidth = 0;
-
 class GroupChildren extends React.Component<IProps, IState> {
+  private tempWidth = 0;
+
   state = {
     minWidth: 0
   };
 
   updateSize = (width: number) => {
-    if (width > tempWidth) {
-      tempWidth = width;
+    if (width > this.tempWidth) {
+      this.tempWidth = width;
       this.setState({ minWidth: width });
     }
   };

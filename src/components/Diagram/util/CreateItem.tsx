@@ -31,7 +31,7 @@ class CreateItem extends React.Component<IProps> {
           x={-padding}
           y={0}
           height={height * 1}
-          width={width + padding * 2}
+          width={width * 2}
           className="diagram__rect diagram__rect--header"
         />
         <text
@@ -46,7 +46,7 @@ class CreateItem extends React.Component<IProps> {
             x={-padding}
             y={0}
             height={height * 2}
-            width={width + padding * 2}
+            width={width * 2}
             className="diagram__rect diagram__rect--content"
           />
           <text

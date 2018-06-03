@@ -1,4 +1,5 @@
 export interface IEntity {
+  type: string;
   pos: [number, number];
   header: string;
   content: string[];
@@ -31,14 +32,16 @@ export class Field {
   };
   entities: IEntity[] = [
     {
+      type: 'content',
       pos: [50, 100],
-      header: 'Tabletest',
-      content: ['hmmm', 'dude']
+      header: 'Table Test',
+      content: ['What', 'dude']
     },
     {
+      type: 'content',
       pos: [500, 500],
       header: 'Test 2',
-      content: ['hahahah', 'dude', 'thats perfect', 'wow']
+      content: ['Ow', 'dude', 'thats perfect', 'wow']
     }
   ];
 }

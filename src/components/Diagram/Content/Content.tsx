@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ContentItem } from '.';
-import { IEntityChild } from './Entity';
-import Pos from '../util/Pos';
-import { IEntity } from '../Settings';
+import { ContentItem } from '..';
+import { IEntityChild } from '../Entity';
+import Pos from '../../util/Pos';
+import { IEntity } from '../../Settings';
 
 interface IProps extends IEntityChild {
   children:

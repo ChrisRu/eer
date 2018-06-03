@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Text from './util/Text';
-import { IEntityChild } from './Entity';
-import Pos from '../util/Pos';
+import Text from '../util/Text';
+import { IEntityChild } from '../Entity';
+import Pos from '../../util/Pos';
 
 interface IProps extends IEntityChild {
   children: string;
@@ -42,7 +42,7 @@ class ContentItem extends React.Component<IProps, IState> {
           ? (this.element as SVGTextElement).getBBox()
           : this.element.getBoundingClientRect();
 
-      const newWidth = (width || 10) + padding.width;
+      const newWidth = (width || 0) + padding.width;
       const calculatedWidth = newWidth > minWidth ? newWidth : minWidth;
 
       if (onUpdateSize) {
